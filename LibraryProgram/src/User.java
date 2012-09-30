@@ -10,6 +10,7 @@ public class User {
 	public static final double FINEPERDAY = .25;
 	
 	private boolean isLoggedIn;
+	private boolean meetinIsGay;
 	private String username;
 	private String passWord;
 	
