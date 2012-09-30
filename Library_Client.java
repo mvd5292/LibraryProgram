@@ -62,7 +62,7 @@ public class Library_Client
 				//control what happens next with a switch
 				switch(userinput)
 				{
-					case 1:
+					case 1: //Checking out a book
 					{
 						System.out.println("\n- BOOK CHECK OUT -\nEnter the ID of the book you would like to check out: ");
 						
@@ -83,13 +83,67 @@ public class Library_Client
 						
 						break;
 					}
-					case 2:
+					case 2: //Renewing a book
 					{
+						System.out.println("\n- BOOK RENEWAL -\nEnter the ID of the book you would like to renew: ");
+						
+						//we can overwrite userinput now because we already checked the value for the switch
+						userinput = input.nextInt();
+						
+						//renewing a book
+						if (usertable[logged_user].RenewBook(userinput))
+						{
+							System.out.println("Book renewed successfully! Now it's due in " + usertable[logged_user].GetWhenDue(userinput) + " days.");
+							
+						}
+						else
+						{
+							//you can't renew this book
+							System.out.println("Error renewing the book. Did you check it out?");
+						}
 						
 						break;
 					}
+					case 3: //Returning a book
+					{
+						System.out.println("\n- BOOK RETURN -\nEnter the ID of the book you would like to return: ");
 						
-				}
+						//we can overwrite userinput now because we already checked the value for the switch
+						userinput = input.nextInt();
+						
+						//renewing a book
+						if (usertable[logged_user].ReturnBook(userinput))
+						{
+							System.out.println("Book returned successfully!");
+							
+						}
+						else
+						{
+							//you can't return this book
+							System.out.println("Error on returning the book. Did you check it out?");
+						}
+						
+						break;
+					}
+					case 4: //Book Search
+					{
+						System.out.println("\n- BOOK SEARCH -\nEnter 1 to search by title.\nEnter 2 to search by author.\nEnter 3 to search by Subject.\nEnter here: ");
+						//first we're going to ask what category they want to search by, then we will ask for the string.
+						
+						//we can overwrite userinput now because we already checked the value for the switch
+						userinput = input.nextInt();
+						
+						//now do another switch...
+						switch(userinput)
+						{
+						
+						}//end switch
+						
+						break;
+					}
+					
+						
+				}//end switch
 				
 				
 				
