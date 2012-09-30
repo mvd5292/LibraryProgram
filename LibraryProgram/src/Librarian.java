@@ -1,13 +1,22 @@
 class Librarian extends user
 {
 	public static Book[] collection;
-
+	
 	void AddBook(String title, String author, String subject, int pageCount)
 	{
-		collection.title = title;
-		collection.author = author;
-		collection.subject = subject;
-		collection.pageCount = pageCount;
+		Library.collectionSize++;
+		collection[Library.collectionSize].title=title;
+		collection[Library.collectionSize].author = author;
+		collection[Library.collectionSize].subject = subject;
+		collection[Library.collectionSize].pageCount = pageCount;
+	}
+	void AddBook(String title, String author)
+	{
+		Library.collectionSize++;
+		collection[Library.collectionSize].title=title;
+		collection[Library.collectionSize].author = author;
+		collection[Library.collectionSize].subject = "";
+		collection[Library.collectionSize].pageCount = -1;
 	}
 	void changeBookTitle(int index, String title)
 	{
