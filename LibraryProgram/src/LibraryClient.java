@@ -4,12 +4,12 @@
  */
 import java.util.Scanner;
 
-public class Library_Client
+public class LibraryClient
 {
 	public static void main(String [] args)
 	{
 		int userinput, usercount = 0;
-		String username, password;
+		String username, password, stringinput;
 		int logged_user = 0;
 		
 		Scanner input = new Scanner(System.in);
@@ -28,7 +28,7 @@ public class Library_Client
 		
 		//create the librarian object
 		//usertable is a static array from the "Library" class
-		usertable[0] = new Librarian(username, password);
+		Library.usertable[0] = new Librarian(username, password);
 		
 		System.out.println("\nInitial Librarian Added.\n"); //extra line between starting instructions
 		
@@ -70,7 +70,7 @@ public class Library_Client
 						userinput = input.nextInt();
 						
 						//checking out a book.
-						if (usertable[logged_user].CheckOutBook(userinput))
+						if (Library.usertable[logged_user].CheckOutBook(userinput))
 						{
 							System.out.println("Book checked out successfully! It's due in " + usertable[logged_user].GetWhenDue(userinput) + " days.");
 							
@@ -91,7 +91,7 @@ public class Library_Client
 						userinput = input.nextInt();
 						
 						//renewing a book
-						if (usertable[logged_user].RenewBook(userinput))
+						if (Library.usertable[logged_user].RenewBook(userinput))
 						{
 							System.out.println("Book renewed successfully! Now it's due in " + usertable[logged_user].GetWhenDue(userinput) + " days.");
 							
@@ -112,7 +112,7 @@ public class Library_Client
 						userinput = input.nextInt();
 						
 						//renewing a book
-						if (usertable[logged_user].ReturnBook(userinput))
+						if (Library.usertable[logged_user].ReturnBook(userinput))
 						{
 							System.out.println("Book returned successfully!");
 							
@@ -133,13 +133,103 @@ public class Library_Client
 						//we can overwrite userinput now because we already checked the value for the switch
 						userinput = input.nextInt();
 						
+						int[] results = new int[Library.collectionSize];
+						
 						//now do another switch...
 						switch(userinput)
 						{
-						//test2
+							case 1: //search by title
+							{
+								System.out.println("Enter the title you want to search for: ");
+								
+								//read input
+								stringinput = input.nextLine();
+								
+								//the search will return an array of potential matches
+								results = Library.SearchByName(stringinput);
+								
+								break;
+							}
+							
+							case 2: //search by author
+							{
+								System.out.println("Enter the author you want to search for: ");
+								
+								//read input
+								stringinput = input.nextLine();
+								
+								//the search will return an array of potential matches
+								results = Library.SearchByAuthor(stringinput);
+								
+								break;
+							}
+							
+							case 3: //search by subject
+							{
+								System.out.println("Enter the subject you want to search for: ");
+								
+								//read input
+								stringinput = input.nextLine();
+								
+								//the search will return an array of potential matches
+								results = Library.SearchBySubject(stringinput);
+								
+								break;
+							}
+							
+							default:
+							{
+								System.out.println("That wasn't a valid option.");
+								results[0] = 0; //0's are invalid indeces, so this will mean an empty array.
+								break;
+							}
 						
 						}//end switch
 						
+						//now that we have the array of potential matches, we need to show them all to the user
+						if (results[0] == 0)
+						{
+							System.out.println("There are no results to display.");
+						}
+						else
+						{
+							System.out.println("\nID#   TITLE\t\tAUTHOR");
+							//print everything out, and the associated ID's
+							for(int i = 0; (i < Library.collectionSize)&&(results[i] != 0); i++)
+							{
+								//so the loop will not enter if results[i] == 0.
+								System.out.println(results[i] + "   " + Library.collection[results[i]].title + "\t" + Library.collection[results[i]].author);
+							}
+						}
+						
+						break;
+					} //end book search, case 4
+					
+					case 5: //putting a book on hold
+					{
+						System.out.println("\nEnter the ID of the book you would like to put on hold: ");
+						
+						//we can overwrite userinput now because we already checked the value for the switch
+						userinput = input.nextInt();
+						
+						//renewing a book
+						if (Library.usertable[logged_user].PutOnHold(userinput))
+						{
+							System.out.println("Book is now reserved for you!");
+							
+						}
+						else
+						{
+							//you can't return this book
+							System.out.println("You cannot put this title on hold.");
+						}
+						
+						break;
+					} //end case 5, putting on hold
+					
+					case 6: //check fines and balance
+					{
+						// !!! current progress
 						break;
 					}
 					

@@ -5,7 +5,7 @@ class Library
 	public static Book[] collection;
 	public static User[] userTable;
 	
-	public static int SearchByName(String name)
+	public static int[] SearchByName(String name)
 	{
 		int indexArray[] = new int[collectionSize];
 		ctr=0;
@@ -33,7 +33,7 @@ class Library
 		}
 		return indexArray;
 	}
-	public static int SearchBySubject(String subject)
+	public static int[] SearchBySubject(String subject)
 	{
 		int indexArray[] = new int[collectionSize];
 		ctr=0;
