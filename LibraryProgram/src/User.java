@@ -11,7 +11,7 @@ public class User {
 	
 	//these 3 need to be public - zkehs
 	public boolean isLoggedIn;
-	public boolean isLibrarian;
+	public boolean isLibrarian;                                                 
 	public String username;
 	
 	
@@ -22,7 +22,7 @@ public class User {
 		return (daysLate * FINEPERDAY);
 	}
 	
-	public double getTotalFine (int daysLate){
+	public double getTotalFine (){
 		
 		if (daysLate > MAXDAYSLATE)
 			return MAXFINE + getFine(daysLate);

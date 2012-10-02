@@ -254,9 +254,57 @@ public class LibraryClient
 						else
 						{
 							//they're a librarian
+							
+							//now we need to provide options for adding new users, books, and other administrative tasks
+							System.out.println("\n-- LIBRARIAN MENU --\nEnter a number corresponding with an action to perform that action.");
+							//now display the options
+							
+							System.out.println("1: Add User");
+							System.out.println("2: Add Book");
+							System.out.println("3: Exit");
+							
+							System.out.println("-----------------------\n\nEnter Your Action Here: ");
+							
+							//new read
+							userinput = input.nextInt();
+							
+							//now switch through these options
+							switch(userinput)
+							{
+								case 1:
+								{
+									//trying to add a new user
+									System.out.println("\nEnter 1 if the new user is a librarian, or 2 otherwise.");
+									
+									userinput = input.nextInt(); 
+									//first check if he's a librarian or not
+									
+									// !!! add a new user here and ask for password/username
+									
+									break;
+								}
+								
+								case 2:
+								{
+									
+									// !!! add a new book here after asking for relevant info
+									break;
+								}
+								case 3:
+								{
+									//leave this empty
+									break;
+								}
+								default:
+								{
+									System.out.println("\nThat was not a valid option.");
+								}
+							}//end switch
+							
+							
 						}
 						break;
-					}
+					} //end case 7
 					
 						
 				}//end switch

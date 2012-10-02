@@ -1,9 +1,11 @@
 class Library
 {
+	//!!! zkehs: The static variables might need to be initialized to start. The collection/usertable should be 999 big or something, with the count vars being 0? don't remember how exactly
 	public static int collectionSize;
 	public static int userCount;
 	public static Book[] collection;
 	public static User[] userTable;
+	public static int currentDate; //added by zkehs
 	
 	public static int[] SearchByName(String name)
 	{
