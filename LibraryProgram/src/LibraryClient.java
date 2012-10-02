@@ -28,7 +28,7 @@ public class LibraryClient
 		
 		//create the librarian object
 		//usertable is a static array from the "Library" class
-		Library.usertable[0] = new Librarian(username, password);
+		Library.userTable[0] = new Librarian(username, password);
 		
 		System.out.println("\nInitial Librarian Added.\n"); //extra line between starting instructions
 		
@@ -40,7 +40,7 @@ public class LibraryClient
 			{
 			
 				//so the user is logged in.
-				System.out.println("Welcome to the Library " + usertable[logged_user].username + ".");
+				System.out.println("Welcome to the Library " + Library.userTable[logged_user].username + ".");
 				
 				System.out.println("Enter a number corresponding with an action to perform that action.");
 				//now display the options
@@ -51,7 +51,15 @@ public class LibraryClient
 				System.out.println("4: Book search");
 				System.out.println("5: Put book on hold");
 				System.out.println("6: Check fines / balance");
-				System.out.println("7: Access Librarian Options");
+				
+				if (Library.userTable[logged_user].isLibrarian)
+				{
+					System.out.println("7: Access Librarian Options");
+				}
+				else
+				{
+					System.out.println("7: N/A");
+				}
 				System.out.println("\n8: Log Out");
 				
 				System.out.println("-----------------------\n\nEnter Your Action Here: ");
@@ -70,9 +78,9 @@ public class LibraryClient
 						userinput = input.nextInt();
 						
 						//checking out a book.
-						if (Library.usertable[logged_user].CheckOutBook(userinput))
+						if (Library.userTable[logged_user].CheckOutBook(userinput))
 						{
-							System.out.println("Book checked out successfully! It's due in " + usertable[logged_user].GetWhenDue(userinput) + " days.");
+							System.out.println("Book checked out successfully! It's due in " + Library.userTable[logged_user].GetWhenDue(userinput) + " days.");
 							
 						}
 						else
@@ -91,9 +99,9 @@ public class LibraryClient
 						userinput = input.nextInt();
 						
 						//renewing a book
-						if (Library.usertable[logged_user].RenewBook(userinput))
+						if (Library.userTable[logged_user].RenewBook(userinput))
 						{
-							System.out.println("Book renewed successfully! Now it's due in " + usertable[logged_user].GetWhenDue(userinput) + " days.");
+							System.out.println("Book renewed successfully! Now it's due in " + Library.userTable[logged_user].GetWhenDue(userinput) + " days.");
 							
 						}
 						else
@@ -112,7 +120,7 @@ public class LibraryClient
 						userinput = input.nextInt();
 						
 						//renewing a book
-						if (Library.usertable[logged_user].ReturnBook(userinput))
+						if (Library.userTable[logged_user].ReturnBook(userinput))
 						{
 							System.out.println("Book returned successfully!");
 							
@@ -213,7 +221,7 @@ public class LibraryClient
 						userinput = input.nextInt();
 						
 						//renewing a book
-						if (Library.usertable[logged_user].PutOnHold(userinput))
+						if (Library.userTable[logged_user].PutOnHold(userinput))
 						{
 							System.out.println("Book is now reserved for you!");
 							
@@ -229,7 +237,24 @@ public class LibraryClient
 					
 					case 6: //check fines and balance
 					{
-						// !!! current progress
+						System.out.println("Your currently owe " + Library.userTable[logged_user].GetTotalFine());
+						
+						break;
+					}
+					
+					//////////////////////////////////////////////////////////////////
+					///// LIBRARIAN OPTIONS
+					case 7:
+					{
+						//first we need to check and see if they are actually a librarian
+						if (!Library.userTable[logged_user].isLibrarian)
+						{
+							System.out.println("You do not have access to these options.")
+						}
+						else
+						{
+							//they're a librarian
+						}
 						break;
 					}
 					

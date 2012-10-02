@@ -1,4 +1,4 @@
-class Librarian extends user
+class Librarian extends User
 {
 	public static Book[] collection;
 	
