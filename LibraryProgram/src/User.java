@@ -7,11 +7,11 @@
  * @author Zac Clark
  * @version 1.0 10/8/2012
  */
-public class User
+public abstract class User
 	{
 	//classwide constants, private:
-	private final double MAXFINE = 20.0; //this is the most a user can be fined for one book
-	private final double FINEPERDAY = 0.25; //this is the charge per day the book is late
+	protected final double MAXFINE = 20.0; //this is the most a user can be fined for one book
+	protected final double FINEPERDAY = 0.25; //this is the charge per day the book is late
 	//public constants:
 	public final int MAXBOOKS = 20; //this is the most books a single user can have associated with their account
 	
@@ -50,34 +50,14 @@ public class User
 	* @param i the index of the global collection of the book
 	* @return the total fine from the book
 	*/
-	public double GetFine(int i)
-	{
-		//If it is past due and we are the holder, we owe money.
-		//an index of 0 means that there is no book, so check that first.
-		if((i > 0) && (Library.collection[i].dateDue > Library.currentDate) && (Library.collection[i].holder == username))
-			return Math.min(MAXFINE, ((Library.collection[i].dateDue - Library.currentDate) * FINEPERDAY));
-		else 
-			return 0; //it isn't due, so we don't owe anything.
-		
-	}
+	public abstract double GetFine(int i);
 	
 	/**
 	* Gets the total fine owed by this user, from all of the books.
 	*
 	* @return the total fine from all books taken out by this user
 	*/
-	public double GetTotalFine ()
-	{
-		double totalFine = 0.0;
-		
-		for(int curbook : myBooks)	
-		{
-			//each index in myBooks is an int that refers to the library collection.
-			totalFine += GetFine(curbook); //so we pass in that index instead of a loop counter here
-		}
-		
-		return totalFine;
-	}
+	public abstract double GetTotalFine();
 	
 	/**
 	* checks out a book
@@ -97,7 +77,7 @@ public class User
 		
 			//find the first empty slot in the mybooks list, and replace it with this index.
 			int j = 0;		
-			while(myBooks[j] != 0)
+			while((myBooks[j] != 0) && myBooks[j] != i)
 				j++;
 		
 			myBooks[j] = i;
@@ -106,6 +86,35 @@ public class User
 		}
 		else 
 			return false; //someone else checked this book out so we can't.
+	}
+	
+	
+	/**
+	* puts a book on hold
+	*
+	* @param i the index of the global collection of the book
+	* @return true if the operation was successful, false otherwise.
+	*/
+	public boolean PutOnHold(int i)
+	{
+		//first check if the book has no holder
+		if((Library.collection[i].holder == "") || (Library.collection[i].onHold && Library.collection[i].holder == username))
+		{
+			//put the book on hold
+			Library.collection[i].holder = username;
+			Library.collection[i].onHold = true;
+		
+			//find the first empty slot in the mybooks list, and replace it with this index, even though we didn't check it out
+			int j = 0;		
+			while((myBooks[j] != 0) && myBooks[j] != i) //the second part here tests if we already  had it on hold for some reason.
+				j++;
+		
+			myBooks[j] = i;
+			
+			return true;
+		}
+		else 
+			return false; //someone else checked this book out or put it on hold so we can't.
 	}
 	
 	
@@ -123,7 +132,13 @@ public class User
 			Library.collection[i].holder = "";
 			Library.collection[i].dateDue = 0;
 		
-			myBooks[i] = 0;
+			
+			//loop and find this index and reset it
+			for(int a = 0; a < myBooks.length; a++)
+			{
+				if (myBooks[a] == i)
+					myBooks[a] = 0;
+			}
 		
 			return true;
 		}
@@ -171,10 +186,49 @@ public class User
 	*/
 	public static void main(String [] args)
 	{
-	
-		//use the collection initializer from meetens example
+		//Initialize a quick collection
+		Library.collection[Library.collectionSize] = new Book();
+		Library.collection[Library.collectionSize].title = "Harry Potter 1";
+		Library.collection[Library.collectionSize].author = "J.K. Rowling";
+		Library.collectionSize++;
+		Library.collection[Library.collectionSize] = new Book();
+		Library.collection[Library.collectionSize].title = "Hunger Games 1";
+		Library.collection[Library.collectionSize].author = "Suzanne Collins";
+		Library.collectionSize++;
+		Library.collection[Library.collectionSize] = new Book();
+		Library.collection[Library.collectionSize].title = "The Great Gatsby";
+		Library.collection[Library.collectionSize].author = "F. Scott Fitzgerald";
 		
+		User testUser = new Customer();
 		
+		testUser.username = "Mary";
+		testUser.password = "123abc";
+		
+		//test logging in
+		System.out.println("Testing login, first test should fail, second should succeed.");
+		System.out.println(testUser.LogIn("Mary", "abc123"));
+		System.out.println(testUser.LogIn("Mary", "123abc"));
+		
+		//now test checking out a book
+		System.out.println("Checkout: " + testUser.CheckOutBook(1));
+		System.out.println("GetWhenDue: " + testUser.GetWhenDue(1));
+		
+		//accelerate time
+		Library.currentDate += 3;
+		
+		System.out.println("RenewBook: " + testUser.RenewBook(1));
+		
+		System.out.println("ReturnBook: " + testUser.ReturnBook(1));
+		System.out.println("PutOnHold: " + testUser.PutOnHold(1));
+		
+		//test fines for the customer
+
+		testUser.CheckOutBook(1);
+		Library.currentDate += 13;
+		
+		System.out.println("Fines, total and single (should be the same): " + testUser.GetFine(1) + ", " + testUser.GetTotalFine());
+		
+		System.out.println("Done!");
 	}
 	
 

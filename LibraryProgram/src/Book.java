@@ -30,6 +30,11 @@ public class Book
 		dateDue = 0;
 	}
 	
+	public String toString()
+	{
+		return "Title: " + title + "\nAuthor: " + author + "\nHolder: " + holder + "\nSubject: " + subject + "\nPageCount: " + pagecount + "\nOn Hold: " + onHold + "\nDate Due: " + dateDue;
+	}
+	
 }
 
 //No functions, so we don't need a test driver.

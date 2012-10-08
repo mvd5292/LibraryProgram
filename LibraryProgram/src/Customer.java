@@ -8,7 +8,47 @@
  */
 public class Customer extends User
 {
+	/**
+	* Calculates the fine from a single book.
+	*
+	* @param i the index of the global collection of the book
+	* @return the total fine from the book
+	*/
+	@Override
+	public double GetFine(int i)
+	{
+		//If it is past due and we are the holder, we owe money.
+		//an index of 0 means that there is no book, so check that first.
+		if((i > 0) && (Library.collection[i].dateDue < Library.currentDate) && (Library.collection[i].holder == username) && !(Library.collection[i].onHold))
+			return Math.min(MAXFINE, ((double)(Library.currentDate - Library.collection[i].dateDue) * FINEPERDAY));
+		else 
+			return 0.0; //it isn't due, so we don't owe anything.
+		
+	}
 	
+	/**
+	* Gets the total fine owed by this user, from all of the books.
+	*
+	* @return the total fine from all books taken out by this user
+	*/
+	@Override
+	public double GetTotalFine ()
+	{
+		double totalFine = 0.0;
+		
+		for(int curbook : myBooks)	
+		{
+			if (curbook > 0)
+			{
+				//each index in myBooks is an int that refers to the library collection.
+				totalFine += GetFine(curbook); //so we pass in that index instead of a loop counter here
+			}
+		}
+		
+		return totalFine;
+	}
+	
+	//Default constructor
 	public Customer()
 	{
 		isLibrarian = false;

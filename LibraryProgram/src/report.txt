@@ -18,11 +18,24 @@ CLASS HIERARCHY: Diagram in folder.
 
 SAMPLE RUNS:
 
-No Methods to test in Book, Customer.
+No Methods to test in Book.
 
 Sample Runs for Library.java:
 
-Sample Runs for User.java:
+Sample Runs for User.java (also tests Customer):
+
+
+Testing login, first test should fail, second should succeed.
+false
+true
+Checkout: true
+GetWhenDue: 7
+RenewBook: true
+ReturnBook: true
+PutOnHold: true
+Fines, total and single (should be the same): 1.5, 1.5
+Done!
+
 
 Sample Runs for librarian.java:
 
