@@ -78,7 +78,7 @@ public class User
 		
 		
 			int j = 0;		
-			while(myBook[j] != 0)
+			while(myBooks[j] != 0)
 				j++;
 		
 			myBooks[j] = i;
@@ -92,7 +92,7 @@ public class User
 	
 	public boolean returnBook(int i){
 		
-		if (Library.collection[i].holder = username)
+		if (Library.collection[i].holder == username)
 		{
 			Library.collection[i].holder = "";
 			Library.collection[i].dateDue = 0;
@@ -108,7 +108,7 @@ public class User
 	
 	public boolean renewBook(int i){
 		
-		if (Library.collection[i].holder = username)
+		if (Library.collection[i].holder == username)
 		{
 			Library.collection[i].dateDue += 7;
 
