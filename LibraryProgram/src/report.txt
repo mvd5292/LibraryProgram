@@ -22,6 +22,31 @@ No Methods to test in Book.
 
 Sample Runs for Library.java:
 
+Test 1 - Search by name of the book: Harry Potter 1
+Index: 1 Book: Harry Potter 1
+Index: 2 Book: Hunger Games 1
+Index: 3 Book: The Great Gatsby
+
+Search Result: 1
+
+Test 2 - Search by name of the author: J.K. Rowling
+Index: 1 Book: Harry Potter 1; Author: J.K. Rowling
+Index: 2 Book: Hunger Games 1; Author: Suzanne Collins
+Index: 3 Book: The Great Gatsby; Author: F. Scott Fitzgerald
+Index: 4 Book: Harry Potter 2; Author: J.K. Rowling
+Search Result: 1
+Search Result: 4
+
+Test 3 - Search by subject: Fiction
+Index: 1 Book: Harry Potter 1; Author: J.K. Rowling; Subject: Fiction
+Index: 2 Book: Hunger Games 1; Author: Suzanne Collins; Subject: Fiction
+Index: 3 Book: The Great Gatsby; Author: F. Scott Fitzgerald; Subject: Classic
+Index: 4 Book: Harry Potter 2; Author: J.K. Rowling; Subject: Fiction
+Search Result: 1
+Search Result: 2
+Search Result: 4
+
+
 Sample Runs for User.java (also tests Customer):
 
 
@@ -38,6 +63,62 @@ Done!
 
 
 Sample Runs for librarian.java:
+
+Test 1: Adding Book
+
+Title: Harry Potter 1
+Author: J.K.Rowling
+Holder: 
+Subject: Fiction
+PageCount: 567
+On Hold: false
+Date Due: 0
+
+Test 2: Adding Another Book
+
+Title: Hunger Games
+Author: Suzanne Collins
+Holder: 
+Subject: 
+PageCount: -1
+On Hold: false
+Date Due: 0
+
+Title: Harry Potter 2
+Author: J.K.Rowling
+Holder: 
+Subject: Fiction
+PageCount: 567
+On Hold: false
+Date Due: 0
+
+Title: Harry Potter 2
+Author: Joanne Kathleen Rowling
+Holder: 
+Subject: Fiction
+PageCount: 567
+On Hold: false
+Date Due: 0
+
+Title: Hunger Games
+Author: Suzanne Collins
+Holder: 
+Subject: Childrens Fantasy
+PageCount: -1
+On Hold: false
+Date Due: 0
+
+Title: Hunger Games
+Author: Suzanne Collins
+Holder: 
+Subject: Childrens Fantasy
+PageCount: 456
+On Hold: false
+Date Due: 0
+
+0.0
+
+0.0
 
 
 

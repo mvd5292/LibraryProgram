@@ -1,37 +1,112 @@
+/** Project: Library System (Zach Kehs, Meeten Doshi, Zac Clark)
+ * 
+ * Librarian.java is where the Librarian can add a book, and/or change the books information.
+ *	
+ * @author Meeten Doshi
+ * @version 1.0 10/8/2012
+ */
 class Librarian extends User
 {
-	public static Book[] collection;
+	//Main method and the Test Driver. 
+	public static void main(String args[])
+	{
+		//Test 1: Adding a book and printing it. 
+		System.out.println("Test 1: Adding Book");
+		Librarian Lib = new Librarian();
+		Lib.AddBook("Harry Potter 1", "J.K.Rowling", "Fiction", 567);
+		System.out.println("\n" + Library.collection[1].toString());
+		
+		//Test 2: Adding a book with just a name of the book and author.
+		System.out.println("\nTest 2: Adding Another Book");
+		Lib.AddBook("Hunger Games", "Suzanne Collins");
+		System.out.println("\n" + Library.collection[2].toString());
+		
+		//Test 3: Changing the book title from Harry Potter 1 to Harry Potter 2
+		Lib.ChangeBookTitle(1, "Harry Potter 2");
+		System.out.println("\n" + Library.collection[1].toString());
+		
+		//Test 4: Changing the book from J K Rowling to Joanne Kathleen Rowling. 
+		Lib.ChangeBookAuthor(1, "Joanne Kathleen Rowling");
+		System.out.println("\n" + Library.collection[1].toString());
+		
+		//Test 5: Changing the second books subject from blank to Childrens fantasy.
+		Lib.ChangeBookSubject(2, "Childrens Fantasy");
+		System.out.println("\n" + Library.collection[2].toString());
+		
+		//Test 6: Changing the page count from -1 to 456.
+		Lib.ChangeBookPageCount(2, 456);
+		System.out.println("\n" + Library.collection[2].toString());
+		
+		//Test 7: Fines are 0.
+		System.out.println("\n" + Lib.GetFine(0));
+		
+		System.out.println("\n" + Lib.GetTotalFine());
+	}
 	
+	//This function takes in title, author, subject, and pageCount as parameters and add them to the database. 
 	void AddBook(String title, String author, String subject, int pageCount)
 	{
-		Library.collectionSize++;
-		collection[Library.collectionSize].title=title;
-		collection[Library.collectionSize].author = author;
-		collection[Library.collectionSize].subject = subject;
-		collection[Library.collectionSize].pageCount = pageCount;
+		try
+		{
+			Library.collection[Library.collectionSize] = new Book();
+			Library.collection[Library.collectionSize].title=title;
+			Library.collection[Library.collectionSize].author = author;
+			Library.collection[Library.collectionSize].subject = subject;
+			Library.collection[Library.collectionSize].pagecount = pageCount;
+			Library.collectionSize++;
+		}
+		catch(ArrayIndexOutOfBoundsException aioobe)
+		{
+		   System.out.println("You've entered an invalid array index.");
+		}
 	}
+	
+	//This function takes the books name and author and sets the other values which can later be changed. 
 	void AddBook(String title, String author)
 	{
+		Library.collection[Library.collectionSize] = new Book();
+		Library.collection[Library.collectionSize].title=title;
+		Library.collection[Library.collectionSize].author = author;
+		Library.collection[Library.collectionSize].subject = "";
+		Library.collection[Library.collectionSize].pagecount = -1;
 		Library.collectionSize++;
-		collection[Library.collectionSize].title=title;
-		collection[Library.collectionSize].author = author;
-		collection[Library.collectionSize].subject = "";
-		collection[Library.collectionSize].pageCount = -1;
 	}
-	void changeBookTitle(int index, String title)
+	
+	//This function takes in the index of the book name to be changed and the title it should be changed to and it changes it. 
+	void ChangeBookTitle(int index, String title)
 	{
-		collection[index].title = title;
+		Library.collection[index].title = title;
 	}
-	void changeBookAuthor(int index, String author)
+	
+	//This function takes the index where the librarian wants to make a change and the name of the author and makes the change.
+	void ChangeBookAuthor(int index, String author)
 	{
-		collection[index].author = author;
+		Library.collection[index].author = author;
 	}
-	void changeBookSubject(int index, String Subject)
+	
+	//This function changes the subject by taking in the index where it needs to be changed and the new subject. 
+	void ChangeBookSubject(int index, String Subject)
 	{
-		collection[index].Subject = Subject;
+		Library.collection[index].subject = Subject;
 	}
-	void changeBookPageCount(int index, String pageCount)
+	
+	//This function changes the pageCount by taking in the index where it needs to be changed and the new pagecount. 
+	void ChangeBookPageCount(int index, int pageCount)
 	{
-		collection[index].pageCount = pageCount;
+		Library.collection[index].pagecount = pageCount;
+	}
+	
+	//No fines for the librarian.
+	@Override
+	public double GetFine(int i)
+	{
+		return 0.0; //No Fine for Librarian.
+	}
+	
+	//No fines for the librarian.
+	@Override
+	public double GetTotalFine()
+	{
+		return 0.0; //No Fine for Librarian.
 	}
 }
