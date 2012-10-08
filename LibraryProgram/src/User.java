@@ -1,49 +1,76 @@
-
-
-
-
-
-public class User {
-
-	public static final int MAXDAYSLATE = 20;
-	public static final int MAXFINE = 20;
-	public static final double FINEPERDAY = .25;
-	public static final int MAXBOOKS = 20;
+/* Project: Library System (Zach Kehs, Meeten Doshi, Zac Clark)
+ * 
+ * This class is a superclass for Librarian and Customer.
+ * It contains all methods needed for users of the library system
+ * 
+ * @author Zach Kehs
+ * @author Zac Clark
+ * @version 1.0 10/8/2012
+ */
+public class User
+	{
+	//classwide constants, private:
+	private final int MAXDAYSLATE = 20;
+	private final double MAXFINE = 20.0;
+	private final double FINEPERDAY = 0.25;
+	//public constants:
+	public final int MAXBOOKS = 20;
 	
-	//these 3 need to be public - zkehs
 	public boolean isLoggedIn;
 	public boolean isLibrarian;                                                 
 	public String username;
 	public int currentDate = 1;
 	
-	public int [] myBooks = new int [MAXBOOKS];
+	public int[] myBooks = new int[MAXBOOKS];
 	
+	//password is protected so that it will be private for subclasses
+	protected String password;
 	
-	private String passWord;
-	
-	public double getFine(int i){
-		
-		if(Library.collection[i].dateDue > currentDate)
+	/**
+	* Calculates the fine from a single book.
+	*
+	* @param i the index of the global collection of the book
+	* @return the total fine from the book
+	*/
+	public double getFine(int i)
+	{
+		//If it is past due and we are the holder, we owe money.
+		//an index of 0 means that there is no book, so check that first.
+		if((i > 0) && (Library.collection[i].dateDue > currentDate) && (Library.collection[i].holder == username))
 			return ((Library.collection[i].dateDue - currentDate) * FINEPERDAY);
 		else 
-			return 0;
+			return 0; //it isn't due, so we don't owe anything.
 		
 	}
 	
-	public double getTotalFine (){
+	/**
+	* Gets the total fine owed by this user, from all of the books.
+	*
+	* @return the total fine from all books taken out by this user
+	*/
+	public double getTotalFine ()
+	{
+		double totalFine = 0.0;
 		
-		double totalFine;
+		for(int curbook : myBooks)	
+		{
+			//each index in myBooks is an int that refers to the library collection.
+			totalFine += getFine(curbook); //so we pass in that index instead of a loop counter here
+		}
 		
-		for(int i = 0; i < Library.collection[].length())
-			totalFine += getFine(i);
-				
 		return totalFine;
-		
 	}
 	
-	public boolean checkOutBook(int i){
-		
-		if(Library.collection[i].holder = "")
+	/**
+	* checks out a book
+	*
+	* @param i the index of the global collection of the book
+	* @return true if the operation was successful, false otherwise.
+	*/
+	public boolean checkOutBook(int i)
+	{
+		//first check if the book has no holder
+		if(Library.collection[i].holder == "")
 		{
 		
 			Library.collection[i].holder = username;
@@ -60,10 +87,7 @@ public class User {
 		}
 		
 		else 
-			return false;''
-			
-		
-		
+			return false;
 	}
 	
 	public boolean returnBook(int i){
