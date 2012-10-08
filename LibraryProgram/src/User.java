@@ -1,4 +1,4 @@
-/* Project: Library System (Zach Kehs, Meeten Doshi, Zac Clark)
+/** Project: Library System (Zach Kehs, Meeten Doshi, Zac Clark)
  * 
  * This class is a superclass for Librarian and Customer.
  * It contains all methods needed for users of the library system
@@ -10,20 +10,20 @@
 public class User
 	{
 	//classwide constants, private:
-	private final double MAXFINE = 20.0;
-	private final double FINEPERDAY = 0.25;
+	private final double MAXFINE = 20.0; //this is the most a user can be fined for one book
+	private final double FINEPERDAY = 0.25; //this is the charge per day the book is late
 	//public constants:
-	public final int MAXBOOKS = 20;
+	public final int MAXBOOKS = 20; //this is the most books a single user can have associated with their account
 	
-	public boolean isLoggedIn = false;
-	public boolean isLibrarian = false;   
+	public boolean isLoggedIn = false; //true if the user is logged in
+	public boolean isLibrarian = false; //true if the user has librarian priveleges.
 	
-	public String username;
+	public String username; //username, used for logging in and recording the holder of a book
 	
-	public int[] myBooks = new int[MAXBOOKS];
+	public int[] myBooks = new int[MAXBOOKS]; //this is the collection of books for htis user
 	
 	//password is protected so that it will be private for subclasses
-	protected String password;
+	protected String password; //this is what is used to log into the account
 	
 	
 	/**
