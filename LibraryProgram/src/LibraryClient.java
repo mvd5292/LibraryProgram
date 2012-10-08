@@ -1,6 +1,11 @@
-/*
- * Zach Kehs
- * CS221 Project: Library Client
+/* Project: Library System (Zach Kehs, Meeten Doshi, Zac Clark)
+ * 
+ * This is going to be the client system for the project (phase 2)
+ * This is not finished yet because we are not supposed to create
+ * tests that work across multiple classes yet.
+ * 
+ * @author Zach Kehs
+ * @version 1.0 10/8/2012
  */
 import java.util.Scanner;
 

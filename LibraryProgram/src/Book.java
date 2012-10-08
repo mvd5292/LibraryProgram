@@ -1,17 +1,22 @@
-//Book Class
-//Zach kehs
+/* Project: Library System (Zach Kehs, Meeten Doshi, Zac Clark)
+ * 
+ * This class is the book, which makes up the collection[] array in Library.
+ * 
+ * @author Zach Kehs
+ * @version 1.0 10/8/2012
+ */
 public class Book
 {
 	public String title;
 	public String author;
-	public String holder;
+	public String holder; //the username of the associated user
 	public String subject;
 	
 	public int pagecount;
 	
-	public boolean onHold;
+	public boolean onHold; //true if the book is not checked out but is on hold with a holder
 	
-	public int dateDue; //we originally thought this was going to be a function, but a public int will work better
+	public int dateDue; //the date the book is due
 	
 	public Book()
 	{
