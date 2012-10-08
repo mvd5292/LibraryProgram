@@ -1,7 +1,7 @@
 /** Project: Library System (Zach Kehs, Meeten Doshi, Zac Clark)
  * 
  * This class is a superclass for Librarian and Customer.
- * It contains all methods needed for users of the library system
+ * It contains all methods needed for users of the library system.
  * 
  * @author Zach Kehs
  * @author Zac Clark
