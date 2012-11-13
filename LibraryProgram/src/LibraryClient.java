@@ -31,6 +31,30 @@ public class LibraryClient extends JPanel implements ActionListener, ItemListene
 	private int usercount;
 	private String username, password, stringinput;
 	private int logged_user;
+	
+	/////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////
+	///////////////////  VARIABLES FOR LOGIN ////////////////////////////
+	/////////////////////////////////////////////////////////////////////
+	
+	private JLabel usernameLabel;
+	
+	
+	/////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////
+	///////////////////  VARIABLES FOR CUSTOMER /////////////////////////
+	/////////////////////////////////////////////////////////////////////
+		
+	
+	
+		
+	/////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////
+	///////////////////  VARIABLES FOR LIBRARIAN ////////////////////////
+	/////////////////////////////////////////////////////////////////////
+	
+	
+	
 	//helper functions to create each panel
 	
 	//Creating the LogIn panel
@@ -40,7 +64,21 @@ public class LibraryClient extends JPanel implements ActionListener, ItemListene
 		//create all the buttons and stuff here and return the panel
 		JPanel temp = new JPanel();
 		
+		GridLayout layout = new GridLayout(2,2);//,5,5);
+		setLayout(layout);
 		
+		//Labels for username and password with login button
+		JLabel usernameLabel = new JLabel("Username:");
+		JLabel passwordLabel = new JLabel("Password:");
+		
+		JTextField usernameField = new JTextField();
+		JTextField passwordField = new JPasswordField();
+		
+		temp.add(usernameLabel);
+		temp.add(usernameField);
+		//break here
+		temp.add(passwordLabel);
+		temp.add(passwordField);
 		return temp;
 	}
 	
@@ -149,6 +187,9 @@ public class LibraryClient extends JPanel implements ActionListener, ItemListene
 		app.add(panel);
 		app.setSize(400,300);
 		app.setVisible(true);
+		app.setTitle("Library System");
+		
+		
 		
 	}
 	
@@ -161,7 +202,7 @@ public class LibraryClient extends JPanel implements ActionListener, ItemListene
 		
 		currentPanel = LOGIN;
 		panelObj = createLogInPanel(); //done.
-	
+		
 		add(panelObj);
 		
 		//switching to other panels should be handled in button presses
