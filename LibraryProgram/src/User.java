@@ -33,7 +33,7 @@ public abstract class User
 	* @param password - the password attempt to log in
 	* @return true if the user was logged in, false otherwise
 	*/
-	public boolean LogIn(String username, String password)
+	public boolean logIn(String username, String password)
 	{
 		if ((username == this.username) && (password == this.password))
 		{
@@ -50,14 +50,14 @@ public abstract class User
 	* @param i the index of the global collection of the book
 	* @return the total fine from the book
 	*/
-	public abstract double GetFine(int i);
+	public abstract double getFine(int i);
 	
 	/**
 	* Gets the total fine owed by this user, from all of the books.
 	*
 	* @return the total fine from all books taken out by this user
 	*/
-	public abstract double GetTotalFine();
+	public abstract double getTotalFine();
 	
 	/**
 	* checks out a book
@@ -65,7 +65,7 @@ public abstract class User
 	* @param i the index of the global collection of the book
 	* @return true if the operation was successful, false otherwise.
 	*/
-	public boolean CheckOutBook(int i)
+	public boolean checkOutBook(int i)
 	{
 		//first check if the book has no holder
 		if((Library.collection[i].holder == "") || (Library.collection[i].onHold && Library.collection[i].holder == username))
@@ -95,7 +95,7 @@ public abstract class User
 	* @param i the index of the global collection of the book
 	* @return true if the operation was successful, false otherwise.
 	*/
-	public boolean PutOnHold(int i)
+	public boolean putOnHold(int i)
 	{
 		//first check if the book has no holder
 		if((Library.collection[i].holder == "") || (Library.collection[i].onHold && Library.collection[i].holder == username))
@@ -124,7 +124,7 @@ public abstract class User
 	* @param i the index of the global collection of the book
 	* @return true if the operation was successful, false otherwise.
 	*/
-	public boolean ReturnBook(int i)
+	public boolean returnBook(int i)
 	{
 		//make sure we're trying to return a book we checked out in the first place
 		if (Library.collection[i].holder == username)
@@ -152,7 +152,7 @@ public abstract class User
 	* @param i the index of the global collection of the book
 	* @return true if the operation was successful, false otherwise.
 	*/
-	public boolean RenewBook(int i)
+	public boolean renewBook(int i)
 	{
 		//You can't renew a book if it isn't checked out or if it isn't due for another week.
 		if ((Library.collection[i].holder == username) && (!Library.collection[i].onHold) && (Library.collection[i].dateDue < Library.currentDate + 7))
@@ -171,7 +171,7 @@ public abstract class User
 	* @param i the index of the global collection of the book
 	* @return the date the book is supposedly due, or -1 if it isn't your book
 	*/
-	public int GetWhenDue(int i)
+	public int getWhenDue(int i)
 	{
 		if (Library.collection[i].holder != username)
 		{

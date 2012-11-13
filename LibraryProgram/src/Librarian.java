@@ -44,7 +44,7 @@ class Librarian extends User
 	}
 	
 	//This function takes in title, author, subject, and pageCount as parameters and add them to the database. 
-	void AddBook(String title, String author, String subject, int pageCount)
+	void addBook(String title, String author, String subject, int pageCount)
 	{
 		try
 		{
@@ -62,7 +62,7 @@ class Librarian extends User
 	}
 	
 	//This function takes the books name and author and sets the other values which can later be changed. 
-	void AddBook(String title, String author)
+	void addBook(String title, String author)
 	{
 		Library.collection[Library.collectionSize] = new Book();
 		Library.collection[Library.collectionSize].title=title;
@@ -73,39 +73,39 @@ class Librarian extends User
 	}
 	
 	//This function takes in the index of the book name to be changed and the title it should be changed to and it changes it. 
-	void ChangeBookTitle(int index, String title)
+	void changeBookTitle(int index, String title)
 	{
 		Library.collection[index].title = title;
 	}
 	
 	//This function takes the index where the librarian wants to make a change and the name of the author and makes the change.
-	void ChangeBookAuthor(int index, String author)
+	void changeBookAuthor(int index, String author)
 	{
 		Library.collection[index].author = author;
 	}
 	
 	//This function changes the subject by taking in the index where it needs to be changed and the new subject. 
-	void ChangeBookSubject(int index, String Subject)
+	void changeBookSubject(int index, String Subject)
 	{
 		Library.collection[index].subject = Subject;
 	}
 	
 	//This function changes the pageCount by taking in the index where it needs to be changed and the new pagecount. 
-	void ChangeBookPageCount(int index, int pageCount)
+	void changeBookPageCount(int index, int pageCount)
 	{
 		Library.collection[index].pagecount = pageCount;
 	}
 	
 	//No fines for the librarian.
 	@Override
-	public double GetFine(int i)
+	public double getFine(int i)
 	{
 		return 0.0; //No Fine for Librarian.
 	}
 	
 	//No fines for the librarian.
 	@Override
-	public double GetTotalFine()
+	public double getTotalFine()
 	{
 		return 0.0; //No Fine for Librarian.
 	}

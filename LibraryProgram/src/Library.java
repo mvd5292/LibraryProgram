@@ -101,7 +101,7 @@ class Library
 	//SearchByName checks the entire database with the string passed in (name) and returns all the index
 	//which are equal.
 	//Parameter 1 - String name: Passed in from the main. Whatever the user wants to search for. 
-	public static int[] SearchByName(String name)
+	public static int[] searchByName(String name)
 	{
 		int indexArray[] = new int[collectionSize];
 		int ctr=0;
@@ -119,7 +119,7 @@ class Library
 	//SearchByAuthor checks the entire database with the authors name which is passed in and returns all the indices
 	//which have the same authors name. 
 	//Parameter 1 - String author: The user can search books for a particular author. 
-	public static int[] SearchByAuthor(String author)
+	public static int[] searchByAuthor(String author)
 	{
 		int indexArray[] = new int[collectionSize];
 		int ctr=0;
@@ -136,7 +136,7 @@ class Library
 	
 	//SearchBySubject checks the entire database with the subject that the user is looking for and returns the indices
 	//Parameter 1 - String subject: Whatever subject the user wants to search for. 
-	public static int[] SearchBySubject(String subject)
+	public static int[] searchBySubject(String subject)
 	{
 		int indexArray[] = new int[collectionSize];
 		int ctr=0;

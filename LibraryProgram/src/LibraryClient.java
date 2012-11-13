@@ -8,15 +8,97 @@
  * @version 1.0 10/8/2012
  */
 import java.util.Scanner;
+import java.awt.*;
+import java.swing.*;
 
-public class LibraryClient
+public class LibraryClient extends JPanel implements ActionListener, ItemListener
 {
+	//create constants to keep track of our current panel number
+	public static final int LOGIN = 0;
+	public static final int CUSTOMER = 1;
+	public static final int LIBRARIAN = 2;
+	
+	int currentPanel; //this is a numbering system for the panel so we know what one to use
+	JPanel panelObj; //this is the current panel we are using
+	int userinput, usercount;
+	String username, password, stringinput;
+	int logged_user;
+	//helper functions to create each panel
+	
+	//Creating the LogIn panel
+	public JPanel createLogInPanel()
+	{
+		//create all the buttons and stuff here and return the panel
+		JPanel temp = new JPanel();
+		
+		
+		return temp;
+	}
+	
+	//Creating the Customer panel
+	public JPanel createCustomerPanel()
+	{
+		//create all the buttons and stuff here and return the panel
+		JPanel temp = new JPanel();
+		
+		
+		return temp;
+	}
+	
+	//Creating the Librarian panel
+	public JPanel createLibrarianPanel()
+	{
+		//create all the buttons and stuff here and return the panel
+		JPanel temp = new JPanel();
+		
+		
+		return temp;
+	}
+	
+	//Reactions to buttons
+	public void actionPerformed(ActionEvent e)
+	{
+		//Switch by panel; then react by button
+		switch(currentPanel)
+		{
+			//login screen. One button to handle; the "login" button.
+			case LOGIN:
+			{
+				//handle the login button
+				break;
+			}
+			
+			//customer interface
+			case CUSTOMER:
+			{
+				
+				break;
+			}
+			
+			//librarian interface
+			case LIBRARIAN:
+			{
+				
+				break;
+			}
+		}
+	}
+	
 	public static void main(String [] args)
 	{
-		int userinput, usercount = 0;
-		String username, password, stringinput;
-		int logged_user = 0;
+		//set all the default values
+		userinput = 0;
+		usercount = 0;
+		logged_user = 0;
 		
+		currentPanel = LOGIN;
+		panelObj = createLogInPanel(); //done.
+		
+		
+		
+		////////////////////////////////////////
+		//////  EVERYTHING BELOW HERE IS OLD STUFF WE NEED TO ADAPT TO THE GUI
+		/*
 		Scanner input = new Scanner(System.in);
 		
 		//because there are no users to start with , require that a librarian is made
@@ -335,7 +417,7 @@ public class LibraryClient
 			3)Find a book
 			4)Hold a book
 			5)Calculate the fine
-			 */
+			 *
 			}
 			else
 			{
@@ -348,6 +430,9 @@ public class LibraryClient
 			}
 			
 		}
+*/
 		
-	}
+	}//end main
+	
+	
 }

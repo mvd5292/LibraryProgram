@@ -15,7 +15,7 @@ public class Customer extends User
 	* @return the total fine from the book
 	*/
 	@Override
-	public double GetFine(int i)
+	public double getFine(int i)
 	{
 		//If it is past due and we are the holder, we owe money.
 		//an index of 0 means that there is no book, so check that first.
@@ -32,7 +32,7 @@ public class Customer extends User
 	* @return the total fine from all books taken out by this user
 	*/
 	@Override
-	public double GetTotalFine ()
+	public double getTotalFine ()
 	{
 		double totalFine = 0.0;
 		
