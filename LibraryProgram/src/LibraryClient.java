@@ -64,8 +64,8 @@ public class LibraryClient extends JPanel implements ActionListener, ItemListene
 		//create all the buttons and stuff here and return the panel
 		JPanel temp = new JPanel();
 		
-		GridLayout layout = new GridLayout(2,2);//,5,5);
-		setLayout(layout);
+		GridLayout layout = new GridLayout(2,2,10,10);
+		temp.setLayout(layout);
 		
 		//Labels for username and password with login button
 		JLabel usernameLabel = new JLabel("Username:");
@@ -79,6 +79,7 @@ public class LibraryClient extends JPanel implements ActionListener, ItemListene
 		//break here
 		temp.add(passwordLabel);
 		temp.add(passwordField);
+		
 		return temp;
 	}
 	
@@ -190,16 +191,17 @@ public class LibraryClient extends JPanel implements ActionListener, ItemListene
 		app.setTitle("Library System");
 		
 		
-		
 	}
 	
 	public LibraryClient()
 	{
+		super();
+
 		//set all the default values
 		userinput = 0;
 		usercount = 0;
 		logged_user = 0;
-		
+
 		currentPanel = LOGIN;
 		panelObj = createLogInPanel(); //done.
 		
