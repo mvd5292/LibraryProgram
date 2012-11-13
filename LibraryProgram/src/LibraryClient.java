@@ -7,27 +7,36 @@
  * @author Zach Kehs
  * @version 1.0 10/8/2012
  */
-import java.util.Scanner;
 import java.awt.*;
-import java.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+
+import javax.swing.*;
 
 public class LibraryClient extends JPanel implements ActionListener, ItemListener
 {
+	//do it this way instead
+	//http://www.apl.jhu.edu/~hall/java/Swing-Tutorial/Swing-Tutorial-JPanel.html
+		
 	//create constants to keep track of our current panel number
 	public static final int LOGIN = 0;
 	public static final int CUSTOMER = 1;
 	public static final int LIBRARIAN = 2;
 	
-	int currentPanel; //this is a numbering system for the panel so we know what one to use
-	JPanel panelObj; //this is the current panel we are using
-	int userinput, usercount;
-	String username, password, stringinput;
-	int logged_user;
+	private int currentPanel; //this is a numbering system for the panel so we know what one to use
+	private JPanel panelObj; //this is the current panel we are using
+	private int userinput;
+	private int usercount;
+	private String username, password, stringinput;
+	private int logged_user;
 	//helper functions to create each panel
 	
 	//Creating the LogIn panel
 	public JPanel createLogInPanel()
 	{
+		//because layout managers are required you might want to try one here?
 		//create all the buttons and stuff here and return the panel
 		JPanel temp = new JPanel();
 		
@@ -68,14 +77,56 @@ public class LibraryClient extends JPanel implements ActionListener, ItemListene
 				break;
 			}
 			
-			//customer interface
+			///////////////////////////////////////////////////////////////////////////////
+			///////////////////////////////////////////////////////////////////////////////
+			////////////   ACTION HANDLING FOR CUSTOMER INTERFACE   ///////////////////////
+			///////////////////////////////////////////////////////////////////////////////
 			case CUSTOMER:
 			{
 				
 				break;
 			}
 			
-			//librarian interface
+			///////////////////////////////////////////////////////////////////////////////
+			///////////////////////////////////////////////////////////////////////////////
+			////////////   ACTION HANDLING FOR LIBRARIAN INTERFACE   ///////////////////////
+			///////////////////////////////////////////////////////////////////////////////
+			case LIBRARIAN:
+			{
+				
+				break;
+			}
+		}
+	}
+	
+	
+	@Override
+	public void itemStateChanged(ItemEvent e)
+	{
+		//Switch by panel; then react by button
+		switch(currentPanel)
+		{
+			//login screen. One button to handle; the "login" button.
+			case LOGIN:
+			{
+				//handle the login button
+				break;
+			}
+			
+			///////////////////////////////////////////////////////////////////////////////
+			///////////////////////////////////////////////////////////////////////////////
+			////////////   ITEM HANDLING FOR CUSTOMER INTERFACE   ///////////////////////
+			///////////////////////////////////////////////////////////////////////////////
+			case CUSTOMER:
+			{
+				
+				break;
+			}
+			
+			///////////////////////////////////////////////////////////////////////////////
+			///////////////////////////////////////////////////////////////////////////////
+			////////////   ITEM HANDLING FOR LIBRARIAN INTERFACE   ///////////////////////
+			///////////////////////////////////////////////////////////////////////////////
 			case LIBRARIAN:
 			{
 				
@@ -86,6 +137,23 @@ public class LibraryClient extends JPanel implements ActionListener, ItemListene
 	
 	public static void main(String [] args)
 	{
+		//start the program from here because the main runs in a static context
+		LibraryClient panel = new LibraryClient();
+		
+		JFrame app = new JFrame();
+		
+		//make it exit when you close
+		app.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+		//add panel and start
+		app.add(panel);
+		app.setSize(400,300);
+		app.setVisible(true);
+		
+	}
+	
+	public LibraryClient()
+	{
 		//set all the default values
 		userinput = 0;
 		usercount = 0;
@@ -93,6 +161,10 @@ public class LibraryClient extends JPanel implements ActionListener, ItemListene
 		
 		currentPanel = LOGIN;
 		panelObj = createLogInPanel(); //done.
+	
+		add(panelObj);
+		
+		//switching to other panels should be handled in button presses
 		
 		
 		
@@ -433,6 +505,9 @@ public class LibraryClient extends JPanel implements ActionListener, ItemListene
 */
 		
 	}//end main
+
+	
+
 	
 	
 }

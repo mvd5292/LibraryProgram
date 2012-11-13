@@ -34,7 +34,7 @@ class Library
 		}
 		System.out.println();
 		int[] titleResult  = new int[collectionSize];
-		titleResult = SearchByName("Harry Potter 1");
+		titleResult = searchByName("Harry Potter 1");
 		for(int i = 0; i <collectionSize; i++)
 		{
 			if(titleResult[i]!=0)
@@ -61,7 +61,7 @@ class Library
 			System.out.println("Index: " + i + " Book: " +collection[i].title + "; Author: " +collection[i].author);
 		}
 		int [] authorResult = new int[collectionSize];
-		authorResult = SearchByAuthor("J.K. Rowling");
+		authorResult = searchByAuthor("J.K. Rowling");
 		for(int i = 0; i<collectionSize; i++)
 		{
 			if(authorResult[i]!=0)
@@ -87,7 +87,7 @@ class Library
 			System.out.println("Index: " + i + " Book: " +collection[i].title + "; Author: " +collection[i].author + "; Subject: " +collection[i].subject);
 		}
 		int [] subjectResult = new int[collectionSize];
-		subjectResult = SearchBySubject("Fiction");
+		subjectResult = searchBySubject("Fiction");
 		for(int i = 0; i<collectionSize; i++)
 		{
 			if(subjectResult[i]!=0)

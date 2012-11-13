@@ -206,27 +206,27 @@ public abstract class User
 		
 		//test logging in
 		System.out.println("Testing login, first test should fail, second should succeed.");
-		System.out.println(testUser.LogIn("Mary", "abc123"));
-		System.out.println(testUser.LogIn("Mary", "123abc"));
+		System.out.println(testUser.logIn("Mary", "abc123"));
+		System.out.println(testUser.logIn("Mary", "123abc"));
 		
 		//now test checking out a book
-		System.out.println("Checkout: " + testUser.CheckOutBook(1));
-		System.out.println("GetWhenDue: " + testUser.GetWhenDue(1));
+		System.out.println("Checkout: " + testUser.checkOutBook(1));
+		System.out.println("GetWhenDue: " + testUser.getWhenDue(1));
 		
 		//accelerate time
 		Library.currentDate += 3;
 		
-		System.out.println("RenewBook: " + testUser.RenewBook(1));
+		System.out.println("RenewBook: " + testUser.renewBook(1));
 		
-		System.out.println("ReturnBook: " + testUser.ReturnBook(1));
-		System.out.println("PutOnHold: " + testUser.PutOnHold(1));
+		System.out.println("ReturnBook: " + testUser.returnBook(1));
+		System.out.println("PutOnHold: " + testUser.putOnHold(1));
 		
 		//test fines for the customer
 
-		testUser.CheckOutBook(1);
+		testUser.checkOutBook(1);
 		Library.currentDate += 13;
 		
-		System.out.println("Fines, total and single (should be the same): " + testUser.GetFine(1) + ", " + testUser.GetTotalFine());
+		System.out.println("Fines, total and single (should be the same): " + testUser.getFine(1) + ", " + testUser.getTotalFine());
 		
 		System.out.println("Done!");
 	}

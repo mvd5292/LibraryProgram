@@ -13,34 +13,34 @@ class Librarian extends User
 		//Test 1: Adding a book and printing it. 
 		System.out.println("Test 1: Adding Book");
 		Librarian Lib = new Librarian();
-		Lib.AddBook("Harry Potter 1", "J.K.Rowling", "Fiction", 567);
+		Lib.addBook("Harry Potter 1", "J.K.Rowling", "Fiction", 567);
 		System.out.println("\n" + Library.collection[1].toString());
 		
 		//Test 2: Adding a book with just a name of the book and author.
 		System.out.println("\nTest 2: Adding Another Book");
-		Lib.AddBook("Hunger Games", "Suzanne Collins");
+		Lib.addBook("Hunger Games", "Suzanne Collins");
 		System.out.println("\n" + Library.collection[2].toString());
 		
 		//Test 3: Changing the book title from Harry Potter 1 to Harry Potter 2
-		Lib.ChangeBookTitle(1, "Harry Potter 2");
+		Lib.changeBookTitle(1, "Harry Potter 2");
 		System.out.println("\n" + Library.collection[1].toString());
 		
 		//Test 4: Changing the book from J K Rowling to Joanne Kathleen Rowling. 
-		Lib.ChangeBookAuthor(1, "Joanne Kathleen Rowling");
+		Lib.changeBookAuthor(1, "Joanne Kathleen Rowling");
 		System.out.println("\n" + Library.collection[1].toString());
 		
 		//Test 5: Changing the second books subject from blank to Childrens fantasy.
-		Lib.ChangeBookSubject(2, "Childrens Fantasy");
+		Lib.changeBookSubject(2, "Childrens Fantasy");
 		System.out.println("\n" + Library.collection[2].toString());
 		
 		//Test 6: Changing the page count from -1 to 456.
-		Lib.ChangeBookPageCount(2, 456);
+		Lib.changeBookPageCount(2, 456);
 		System.out.println("\n" + Library.collection[2].toString());
 		
 		//Test 7: Fines are 0.
-		System.out.println("\n" + Lib.GetFine(0));
+		System.out.println("\n" + Lib.getFine(0));
 		
-		System.out.println("\n" + Lib.GetTotalFine());
+		System.out.println("\n" + Lib.getTotalFine());
 	}
 	
 	//This function takes in title, author, subject, and pageCount as parameters and add them to the database. 

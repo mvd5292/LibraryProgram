@@ -41,7 +41,7 @@ public class Customer extends User
 			if (curbook > 0)
 			{
 				//each index in myBooks is an int that refers to the library collection.
-				totalFine += GetFine(curbook); //so we pass in that index instead of a loop counter here
+				totalFine += getFine(curbook); //so we pass in that index instead of a loop counter here
 			}
 		}
 		
