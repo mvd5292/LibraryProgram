@@ -38,7 +38,9 @@ public class LibraryClient extends JPanel implements ActionListener, ItemListene
 	/////////////////////////////////////////////////////////////////////
 	
 	private JLabel usernameLabel;
-	
+	private JLabel passwordLabel;
+	private JTextField usernameField;
+	private JPasswordField passwordField;
 	
 	/////////////////////////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////////
@@ -68,11 +70,11 @@ public class LibraryClient extends JPanel implements ActionListener, ItemListene
 		temp.setLayout(layout);
 		
 		//Labels for username and password with login button
-		JLabel usernameLabel = new JLabel("Username:");
-		JLabel passwordLabel = new JLabel("Password:");
+		usernameLabel = new JLabel("Username:");
+		passwordLabel = new JLabel("Password:");
 		
-		JTextField usernameField = new JTextField();
-		JTextField passwordField = new JPasswordField();
+		usernameField = new JTextField();
+		passwordField = new JPasswordField();
 		
 		temp.add(usernameLabel);
 		temp.add(usernameField);
