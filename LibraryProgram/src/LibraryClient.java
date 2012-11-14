@@ -161,6 +161,7 @@ public class LibraryClient extends JPanel implements ActionListener, ItemListene
 		constraints.gridwidth = 2;
 		constraints.gridheight = 1;
 		layout.setConstraints(passwordField, constraints);		
+		passwordField.addActionListener(this);
 		temp.add(passwordField);
 		
 		//and the login button
@@ -618,15 +619,13 @@ public class LibraryClient extends JPanel implements ActionListener, ItemListene
 		//app is created before the panel so taht we can change the size from within the panel
 		LibraryClient panel = new LibraryClient();
 		
-		
+		app.add(panel);
 		//make it exit when you close
 		app.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		app.setResizable(false);
 		app.setVisible(true);
 		app.setTitle("Library System");
-		
-		app.add(panel);
 		
 	}
 	
