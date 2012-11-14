@@ -53,6 +53,7 @@ class Librarian extends User
 	}
 	
 	//This function takes in title, author, subject, and pageCount as parameters and add them to the database. 
+	@Override
 	void addBook(String title, String author, String subject, int pageCount)
 	{
 		try
@@ -71,6 +72,7 @@ class Librarian extends User
 	}
 	
 	//This function takes the books name and author and sets the other values which can later be changed. 
+	@Override
 	void addBook(String title, String author)
 	{
 		Library.collection[Library.collectionSize] = new Book();
@@ -82,24 +84,28 @@ class Librarian extends User
 	}
 	
 	//This function takes in the index of the book name to be changed and the title it should be changed to and it changes it. 
+	@Override
 	void changeBookTitle(int index, String title)
 	{
 		Library.collection[index].title = title;
 	}
 	
 	//This function takes the index where the librarian wants to make a change and the name of the author and makes the change.
+	@Override
 	void changeBookAuthor(int index, String author)
 	{
 		Library.collection[index].author = author;
 	}
 	
 	//This function changes the subject by taking in the index where it needs to be changed and the new subject. 
+	@Override
 	void changeBookSubject(int index, String Subject)
 	{
 		Library.collection[index].subject = Subject;
 	}
 	
 	//This function changes the pageCount by taking in the index where it needs to be changed and the new pagecount. 
+	@Override
 	void changeBookPageCount(int index, int pageCount)
 	{
 		Library.collection[index].pagecount = pageCount;

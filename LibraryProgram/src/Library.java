@@ -35,7 +35,7 @@ class Library
 		System.out.println();
 		int[] titleResult  = new int[collectionSize];
 		titleResult = searchByName("Harry Potter 1");
-		for(int i = 0; i <collectionSize; i++)
+		for(int i = 0; i < collectionSize; i++)
 		{
 			if(titleResult[i]!=0)
 			{

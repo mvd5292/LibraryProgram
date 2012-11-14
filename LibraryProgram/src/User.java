@@ -193,6 +193,43 @@ public abstract class User
 		else return (Library.collection[i].dateDue);
 	}
 	
+	//virtual
+	void addBook(String title, String author, String subject, int pageCount)
+	{
+		
+	}
+	
+	void addBook(String title, String author)
+	{
+		
+	}
+	
+	//This function takes in the index of the book name to be changed and the title it should be changed to and it changes it. 
+	void changeBookTitle(int index, String title)
+	{
+	//	Library.collection[index].title = title;
+	}
+	
+	//This function takes the index where the librarian wants to make a change and the name of the author and makes the change.
+	void changeBookAuthor(int index, String author)
+	{
+	//	Library.collection[index].author = author;
+	}
+	
+	//This function changes the subject by taking in the index where it needs to be changed and the new subject. 
+	void changeBookSubject(int index, String Subject)
+	{
+		//Library.collection[index].subject = Subject;
+	}
+	
+	//This function changes the pageCount by taking in the index where it needs to be changed and the new pagecount. 
+	void changeBookPageCount(int index, int pageCount)
+	{
+		//Library.collection[index].pagecount = pageCount;
+	}
+	
+	
+	
 	/**
 	* Test driver
 	*

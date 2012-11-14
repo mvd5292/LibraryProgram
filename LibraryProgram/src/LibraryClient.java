@@ -190,7 +190,7 @@ public class LibraryClient extends JPanel implements ActionListener, ItemListene
 		
 		if (currentPanel == LIBRARIAN)
 		{
-			app.setSize(900,600);
+			app.setSize(800,700);
 		}
 		else
 		{
@@ -635,8 +635,6 @@ public class LibraryClient extends JPanel implements ActionListener, ItemListene
 			}//end loginbutton
 			
 
-			
-			
 			///////////////////////////////////////////////////////////////////////////////
 			///////////////////////////////////////////////////////////////////////////////
 			////////////   ACTION HANDLING FOR CUSTOMER INTERFACE   ///////////////////////
@@ -746,6 +744,13 @@ public class LibraryClient extends JPanel implements ActionListener, ItemListene
 					{
 						popupBox("Passing {" + searchTextField.getText() + "}", "");
 						results = Library.searchByName(searchTextField.getText());
+						
+						for(int i = 1; i <= Library.collectionSize; i++)
+						{
+							//crashes here
+							popupBox(i + "th index is " + results[i-1] + ", title {" + Library.collection[i].title + "}", "");
+						}
+						
 						break;
 					}
 					case S_AUTHOR:
@@ -763,7 +768,7 @@ public class LibraryClient extends JPanel implements ActionListener, ItemListene
 				
 				for(int i = 0; i < Library.collectionSize; i++)
 				{
-					popupBox("Result " + i + " is " + results[i], "");
+					//popupBox("Result " + i + " is " + results[i], "");
 					//check if this slot is filled
 					if (results[i] > 0) //0 is an empty result
 					{
@@ -950,6 +955,8 @@ public class LibraryClient extends JPanel implements ActionListener, ItemListene
 	{
 		super();
 		
+		new Library(); //necessary?
+		
 		createData(); //create the library for us to use
 
 		//set all the default values
@@ -1097,7 +1104,7 @@ public class LibraryClient extends JPanel implements ActionListener, ItemListene
 						
 						//we can overwrite userinput now because we already checked the value for the switch
 						userinput = input.nextInt();
-						TODO
+						
 						int[] results = new int[Library.collectionSize];
 						
 						//now do another switch...
