@@ -331,6 +331,53 @@ public class LibraryClient extends JPanel implements ActionListener, ItemListene
 		//create all the buttons and stuff here and return the panel
 		JPanel temp = new JPanel();
 		
+		//temp.setLayout(new GridLayout(1,4, 4, 4));
+      	addBookNameLabel = new JLabel("Enter Book Name: ");
+      	add(addBookNameLabel);
+      	addBookName = new JTextField(10);
+      	addBookName.addActionListener(this);
+      	add(addBookName);
+      	addBookAuthorLabel = new JLabel("Enter Author's Name: ");
+      	add(addBookAuthorLabel);
+      	addBookAuthor = new JTextField(10);
+      	addBookAuthor.addActionListener(this);
+      	add(addBookAuthor);
+      	addBookGenreLabel = new JLabel("Enter books Genre: ");
+      	add(addBookGenreLabel);
+      	addBookGenre = new JTextField(10);
+      	addBookGenre.addActionListener(this);
+      	add(addBookGenre);
+      	addBookPageNumberLabel = new JLabel("Enter number of page: ");
+      	add(addBookPageNumberLabel);
+      	addBookPageNumber = new JTextField(10);
+      	addBookPageNumber.addActionListener(this);
+      	add(addBookPageNumber);
+      	addBookNameButton = new JButton("Add Book");
+      	addBookNameButton.addActionListener(this);
+      	add(addBookNameButton);
+      	editBookNameLabel = new JLabel("Edit Book Name: ");
+      	add(editBookNameLabel);
+      	editBookName = new JTextField(10);
+      	editBookName.addActionListener(this);
+      	add(editBookName);
+      	editBookAuthorLabel = new JLabel("Edit Author's Name: ");
+      	add(editBookAuthorLabel);
+      	editBookAuthor = new JTextField(10);
+      	editBookAuthor.addActionListener(this);
+      	add(editBookAuthor);
+      	editBookGenreLabel = new JLabel("Edit books Genre: ");
+      	add(editBookGenreLabel);
+      	editBookGenre = new JTextField(10);
+      	editBookGenre.addActionListener(this);
+      	add(editBookGenre);
+      	editBookPageNumberLabel = new JLabel("Edit number of page: ");
+      	add(editBookPageNumberLabel);
+      	editBookPageNumber = new JTextField(10);
+      	editBookPageNumber.addActionListener(this);
+      	add(editBookPageNumber);
+      	editBookNameButton = new JButton("edit Book");
+      	editBookNameButton.addActionListener(this);
+      	add(editBookNameButton);
 		
 		return temp;
 	}
