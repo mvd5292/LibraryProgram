@@ -77,7 +77,6 @@ public class LibraryClient extends JPanel implements ActionListener, ItemListene
 	/////////////////////////////////////////////////////////////////////
 	
 	
-	
 	//helper functions to create each panel
 	
 	//Creating the LogIn panel
