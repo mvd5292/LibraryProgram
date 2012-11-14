@@ -25,6 +25,8 @@ public class LibraryClient extends JPanel implements ActionListener, ItemListene
 	public static final int CUSTOMER = 1;
 	public static final int LIBRARIAN = 2;
 	
+	private static JFrame app;
+	
 	private int currentPanel; //this is a numbering system for the panel so we know what one to use
 	private JPanel panelObj; //this is the current panel we are using
 	private int userinput;
@@ -41,13 +43,32 @@ public class LibraryClient extends JPanel implements ActionListener, ItemListene
 	private JLabel passwordLabel;
 	private JTextField usernameField;
 	private JPasswordField passwordField;
+	private JButton loginButton;
 	
 	/////////////////////////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////////
 	///////////////////  VARIABLES FOR CUSTOMER /////////////////////////
 	/////////////////////////////////////////////////////////////////////
 		
+	private JLabel spaceLabel;
+	private JLabel searchLabel;
+	private JLabel actionLabel;
+	private JComboBox actionsDropDown;
+	private static final String[] ACTIONCATAGORIES = {"Check out", "Get Due Date", "Hold", "Renew", "Return"};
+
+	private JTextField idNumberInput;
+	private JLabel myBooksLabel;
+	private JComboBox searchDropDown;
+	private static final String[] SEARCHCATAGORIES = {"Author", "Genre", "Title"};
+	private JTextField searchTextField;
+	private JTextArea searchResults;
+	private JTextArea myBooksTextArea;
+	private JButton getFines;
+	private JButton dueDate;
+	private JTextField showFines;
+	private JLabel idLabel;
 	
+	private double totalFines;
 	
 		
 	/////////////////////////////////////////////////////////////////////
@@ -62,28 +83,81 @@ public class LibraryClient extends JPanel implements ActionListener, ItemListene
 	//Creating the LogIn panel
 	public JPanel createLogInPanel()
 	{
+		//change application size to the login panel size
+		app.setSize(260,155);
+		
 		//because layout managers are required you might want to try one here?
 		//create all the buttons and stuff here and return the panel
 		JPanel temp = new JPanel();
 		
-		GridLayout layout = new GridLayout(2,2,10,10);
+		GridBagLayout layout = new GridBagLayout();//(0,2,10,10);
+		GridBagConstraints constraints = new GridBagConstraints();
+		
+		constraints.fill = GridBagConstraints.BOTH;
+		constraints.weightx = 1.0;
+		constraints.weighty = 1.0;
+		
 		temp.setLayout(layout);
+		
 		
 		//Labels for username and password with login button
 		usernameLabel = new JLabel("Username:");
 		passwordLabel = new JLabel("Password:");
 		
-		usernameField = new JTextField();
-		passwordField = new JPasswordField();
+		usernameField = new JTextField(10);
+		passwordField = new JPasswordField(10);
 		
+		loginButton = new JButton("Log In");
+		
+		int PADDING = 5; //pixels of cushioning
+		
+		Insets padobj = new Insets(PADDING, PADDING, PADDING, PADDING);
+ 		 
+		constraints.insets = padobj;
+		
+		//Username Label
+		constraints.gridx = 0;
+		constraints.gridy = 0;
+		constraints.gridwidth = 1;
+		constraints.gridheight = 1;
+		layout.setConstraints(usernameLabel, constraints);
 		temp.add(usernameLabel);
+		
+		//user field
+		constraints.gridx = 1;
+		constraints.gridy = 0;
+		constraints.gridwidth = 2;
+		constraints.gridheight = 1;
+		layout.setConstraints(usernameField, constraints);
 		temp.add(usernameField);
-		//break here
+		
+		//password label
+		constraints.gridx = 0;
+		constraints.gridy = 1;
+		constraints.gridwidth = 1;
+		constraints.gridheight = 1;
+		layout.setConstraints(passwordLabel, constraints);
 		temp.add(passwordLabel);
+		
+		//passwordfield
+		constraints.gridx = 1;
+		constraints.gridy = 1;
+		constraints.gridwidth = 2;
+		constraints.gridheight = 1;
+		layout.setConstraints(passwordField, constraints);		
 		temp.add(passwordField);
 		
+		//and the login button
+		constraints.gridx = 0;
+		constraints.gridy = 2;
+		constraints.gridwidth = 3;
+		constraints.gridheight = 1;
+		layout.setConstraints(loginButton, constraints);
+		loginButton.addActionListener(this);
+		temp.add(loginButton);
+		
 		return temp;
-	}
+	}//end create loginpanel
 	
 	//Creating the Customer panel
 	public JPanel createCustomerPanel()
@@ -91,7 +165,159 @@ public class LibraryClient extends JPanel implements ActionListener, ItemListene
 		//create all the buttons and stuff here and return the panel
 		JPanel temp = new JPanel();
 		
+		app.setSize(700,500);
 		
+		GridBagLayout layout = new GridBagLayout();
+		GridBagConstraints constraints = new GridBagConstraints();
+		
+		
+		constraints.fill = GridBagConstraints.BOTH;
+		constraints.weightx = 1.0;
+		constraints.weighty = 1.0;
+		
+		
+		temp.setLayout(layout);
+		
+		spaceLabel = new JLabel("   ");
+		searchLabel = new JLabel("Search by: ");
+		myBooksLabel = new JLabel("My Books");
+		actionLabel = new JLabel("Actions: ");
+		searchDropDown = new JComboBox(SEARCHCATAGORIES);
+		actionsDropDown = new JComboBox(ACTIONCATAGORIES);
+		
+		idNumberInput = new JTextField(15);
+		idNumberInput.addActionListener(this);
+		
+		searchTextField = new JTextField(15);
+		
+		showFines = new JTextField(15);
+		showFines.setEditable(false);
+		
+		searchResults = new JTextArea("Search Results", 10,10);
+		myBooksTextArea = new JTextArea("My Books", 10,10);
+		
+		getFines = new JButton("Fines");
+		getFines.addActionListener(this);
+		
+		dueDate = new JButton("Due Date");
+		idLabel = new JLabel("Id Number: ");
+		
+		constraints.gridx = 0;
+		constraints.gridy = 0; 
+		constraints.gridwidth = 1;
+		constraints.gridheight = 1;
+	
+		layout.setConstraints(searchLabel, constraints);
+		temp.add(searchLabel);
+
+		constraints.gridx = 1;
+		constraints.gridy = 0; 
+		constraints.gridwidth = 1;
+		constraints.gridheight = 1;
+	
+		layout.setConstraints(searchDropDown, constraints);
+		temp.add(searchDropDown);
+		
+		constraints.gridx = 2;
+		constraints.gridy = 0; 
+		constraints.gridwidth = 1;
+		constraints.gridheight = 1;
+	
+		layout.setConstraints(searchTextField, constraints);
+		temp.add(searchTextField);
+		
+		
+		
+		constraints.gridx = 3;
+		constraints.gridy = 5; 
+		constraints.gridwidth = 1;
+		constraints.gridheight = 1;
+	
+		layout.setConstraints(actionLabel, constraints);
+		temp.add(actionLabel);
+		
+		
+		constraints.gridx = 0;
+		constraints.gridy = 1; 
+		constraints.gridwidth = 3;
+		constraints.gridheight = 3;
+	
+		layout.setConstraints(searchResults, constraints);
+		temp.add(searchResults);
+		
+
+		constraints.gridx = 0;
+		constraints.gridy = 5; 
+		constraints.gridwidth = 1;
+		constraints.gridheight = 1;
+	
+		layout.setConstraints(spaceLabel, constraints);
+		temp.add(spaceLabel);
+		
+		
+		
+		constraints.gridx = 0;
+		constraints.gridy = 6; 
+		constraints.gridwidth = 1;
+		constraints.gridheight = 1;
+	
+		layout.setConstraints(myBooksLabel, constraints);
+		temp.add(myBooksLabel);
+		
+		constraints.gridx = 0;
+		constraints.gridy = 7; 
+		constraints.gridwidth = 3;
+		constraints.gridheight = 1;
+	
+		layout.setConstraints(myBooksTextArea, constraints);
+		temp.add(myBooksTextArea);
+		
+		
+
+		constraints.gridx = 3;
+		constraints.gridy = 0; 
+		constraints.gridwidth = 1;
+		constraints.gridheight = 1;
+	
+		layout.setConstraints(getFines, constraints);
+		temp.add(getFines);
+		
+		
+
+		constraints.gridx = 4;
+		constraints.gridy = 0; 
+		constraints.gridwidth = 1;
+		constraints.gridheight = 1;
+	
+		layout.setConstraints(showFines, constraints);
+		temp.add(showFines);
+		
+		
+		constraints.gridx = 4;
+		constraints.gridy = 5; 
+		constraints.gridwidth = 1;
+		constraints.gridheight = 1;
+	
+		layout.setConstraints(actionsDropDown, constraints);
+		temp.add(actionsDropDown);
+		
+		constraints.gridx = 3;
+		constraints.gridy = 6; 
+		constraints.gridwidth = 1;
+		constraints.gridheight = 1;
+	
+		layout.setConstraints(idLabel, constraints);
+		temp.add(idLabel);
+		
+		
+		constraints.gridx = 4;
+		constraints.gridy = 6; 
+		constraints.gridwidth = 1;
+		constraints.gridheight = 1;
+	
+		layout.setConstraints(idNumberInput, constraints);
+		temp.add(idNumberInput);
+				
 		return temp;
 	}
 	
@@ -115,6 +341,74 @@ public class LibraryClient extends JPanel implements ActionListener, ItemListene
 			case LOGIN:
 			{
 				//handle the login button
+				if (e.getSource() == loginButton)
+				{
+					//handle the login button
+					
+					if (Library.userCount == 0)
+					{
+						//initial user
+						username = usernameField.getText();
+						//getPassword returns a char[], and we need a String...
+						password = (passwordField.getPassword()).toString();
+						
+						//now create the first library user
+						Library.userTable[0] = new Librarian(username, password);
+						
+						//switch to the customer panel
+						switchPanel(CUSTOMER);
+						
+						
+						//currentPanel = LIBRARIAN;
+						//panelObj = createLibrarianPanel();
+						
+						popupBox("Initial Librarian Created.", "Information");
+					}
+					else
+					{
+						//see if the username matches anyone preexisting.
+						//loop through users.
+						boolean failed = false;
+						
+						for(int i = 0; i < Library.userCount; i++)
+						{
+							if (Library.userTable[i].logIn(username, password))
+							{
+								//log in successful
+								failed = false;
+								
+								logged_user = i;
+								
+								//check if the user is a libraria
+								if (Library.userTable[i].isLibrarian)
+								{
+									//not sure if I have to delete this panel first
+									currentPanel = LIBRARIAN;
+									panelObj = createLibrarianPanel();
+								}
+								else
+								{
+									currentPanel = CUSTOMER;
+									panelObj = createCustomerPanel();
+								}
+								
+								break; //get out of the loop
+							}
+							else
+							{
+								//incorrect!
+								failed = true;
+							}
+						}
+						
+						if (failed)
+						{
+							popupBox("The username or password is incorrect.", "LOG IN FAILED");
+						}
+					}//end needed to log in
+					
+				}//end loginbutton
+				
 				break;
 			}
 			
@@ -150,7 +444,7 @@ public class LibraryClient extends JPanel implements ActionListener, ItemListene
 			//login screen. One button to handle; the "login" button.
 			case LOGIN:
 			{
-				//handle the login button
+				
 				break;
 			}
 			
@@ -179,20 +473,61 @@ public class LibraryClient extends JPanel implements ActionListener, ItemListene
 	public static void main(String [] args)
 	{
 		//start the program from here because the main runs in a static context
+		//LibraryClient panel = new LibraryClient();
+		
+		app = new JFrame();
+		
+		//app is created before the panel so taht we can change the size from within the panel
 		LibraryClient panel = new LibraryClient();
 		
-		JFrame app = new JFrame();
 		
 		//make it exit when you close
 		app.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		//add panel and start
-		app.add(panel);
-		app.setSize(400,300);
+		//app.setSize(260,170);
+		app.setResizable(false);
 		app.setVisible(true);
 		app.setTitle("Library System");
 		
+		app.add(panel);
 		
+	}
+	
+	//This makes a popupBox to annoy the user with a message
+	public static void popupBox(String messageBody, String heading)
+    {
+		//use JOptionPane to show a message
+        JOptionPane.showMessageDialog(null, messageBody, heading, JOptionPane.INFORMATION_MESSAGE);
+    }
+	
+	
+	//switch panel to CUSTOMER, LIBRARIAN, or LOGIN.
+	public void switchPanel(int newPanel)
+	{
+		remove(panelObj);
+		currentPanel = newPanel;
+		
+		switch(currentPanel)
+		{
+			case CUSTOMER:
+			{
+				panelObj = createCustomerPanel();
+				break;
+			}
+			case LIBRARIAN:
+			{
+				panelObj = createLibrarianPanel();
+				break;
+			}
+			case LOGIN:
+			{
+				panelObj = createLogInPanel();
+				break;
+			}
+		}
+		
+		add(panelObj);
 	}
 	
 	public LibraryClient()
