@@ -49,8 +49,10 @@ public class Customer extends User
 	}
 	
 	//Default constructor
-	public Customer()
+	public Customer(String Username, String Password)
 	{
+		super(Username, Password);
+		
 		isLibrarian = false;
 	}
 

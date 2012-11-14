@@ -25,6 +25,19 @@ public abstract class User
 	//password is protected so that it will be private for subclasses
 	protected String password; //this is what is used to log into the account
 	
+	/**
+	* set the username and pasword in the constructor
+	*
+	* @param username - the username attempt to log in
+	* @param password - the password attempt to log in
+	*/
+	public User(String username, String password)
+	{
+		this.username = username;
+		this.password = password;
+	}
+	
+	
 	
 	/**
 	* Logs the user into the system.
@@ -199,7 +212,7 @@ public abstract class User
 		Library.collection[Library.collectionSize].title = "The Great Gatsby";
 		Library.collection[Library.collectionSize].author = "F. Scott Fitzgerald";
 		
-		User testUser = new Customer();
+		User testUser = new Customer("test", "test");
 		
 		testUser.username = "Mary";
 		testUser.password = "123abc";

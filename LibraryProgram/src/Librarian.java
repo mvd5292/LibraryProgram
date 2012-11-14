@@ -7,12 +7,21 @@
  */
 class Librarian extends User
 {
+	//explicitly defined constructor
+	public Librarian(String username, String password)
+	{
+		//pass this back to the super
+		super(username, password);
+		
+		isLibrarian = true;
+	}
+
 	//Main method and the Test Driver. 
 	public static void main(String args[])
 	{
 		//Test 1: Adding a book and printing it. 
 		System.out.println("Test 1: Adding Book");
-		Librarian Lib = new Librarian();
+		Librarian Lib = new Librarian("test","test");
 		Lib.addBook("Harry Potter 1", "J.K.Rowling", "Fiction", 567);
 		System.out.println("\n" + Library.collection[1].toString());
 		
