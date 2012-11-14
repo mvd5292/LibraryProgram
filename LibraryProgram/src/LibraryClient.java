@@ -185,169 +185,164 @@ public class LibraryClient extends JPanel implements ActionListener, ItemListene
 		app.setSize(700,500);
 		
 				
-				GridBagLayout layout = new GridBagLayout();
-				GridBagConstraints constraints = new GridBagConstraints();
-				
-				
-				constraints.fill = GridBagConstraints.BOTH;
-				constraints.weightx = 1.0;
-				constraints.weighty = 1.0;
-				
-			
+		GridBagLayout layout = new GridBagLayout();
+		GridBagConstraints constraints = new GridBagConstraints();
+		
+		
+		constraints.fill = GridBagConstraints.BOTH;
+		constraints.weightx = 1.0;
+		constraints.weighty = 1.0;
+		
+	
 		temp.setLayout(layout);
-				
-				spaceLabel = new JLabel("   ");
-				searchLabel = new JLabel("Search by: ");
-				myBooksLabel = new JLabel("My Books");
-				actionLabel = new JLabel("Actions: ");
-				searchDropDown = new JComboBox(SEARCHCATAGORIES);
-				actionsDropDown = new JComboBox(ACTIONCATAGORIES);
-				actionsDropDown.addActionListener(this);
-				
-				idNumberInput = new JTextField(15);
-				idNumberInput.addActionListener(this);
-				
-				searchTextField = new JTextField(15);
-				
-				showFines = new JTextField(15);
-				showFines.setEditable(false);
-				
-				searchResults = new JTextArea("Search Results", 10,10);
-				myBooksTextArea = new JTextArea("My Books", 10,10);
-				
-				getFines = new JButton("Fines");
-				getFines.addActionListener(this);
-				
-				dueDate = new JButton("Due Date");
-				idLabel = new JLabel("Id Number: ");
-				
-				constraints.gridx = 0;
-				constraints.gridy = 0; 
-				constraints.gridwidth = 1;
-				constraints.gridheight = 1;
-			
+		
+		spaceLabel = new JLabel("   ");
+		searchLabel = new JLabel("Search by: ");
+		myBooksLabel = new JLabel("My Books");
+		actionLabel = new JLabel("Actions: ");
+		searchDropDown = new JComboBox(SEARCHCATAGORIES);
+		actionsDropDown = new JComboBox(ACTIONCATAGORIES);
+		actionsDropDown.addActionListener(this);
+		
+		idNumberInput = new JTextField(15);
+		idNumberInput.addActionListener(this);
+		
+		searchTextField = new JTextField(15);
+		
+		showFines = new JTextField(15);
+		showFines.setEditable(false);
+		
+		searchResults = new JTextArea("Search Results", 10,10);
+		myBooksTextArea = new JTextArea("My Books", 10,10);
+		
+		getFines = new JButton("Fines");
+		getFines.addActionListener(this);
+		
+		dueDate = new JButton("Due Date");
+		idLabel = new JLabel("Id Number: ");
+		
+		constraints.gridx = 0;
+		constraints.gridy = 0; 
+		constraints.gridwidth = 1;
+		constraints.gridheight = 1;
+	
 		layout.setConstraints(searchLabel, constraints);
-				temp.add(searchLabel);
+		temp.add(searchLabel);
 
-				constraints.gridx = 1;
-				constraints.gridy = 0; 
-				constraints.gridwidth = 1;
-				constraints.gridheight = 1;
-			
+		constraints.gridx = 1;
+		constraints.gridy = 0; 
+		constraints.gridwidth = 1;
+		constraints.gridheight = 1;
+	
 		layout.setConstraints(searchDropDown, constraints);
-				temp.add(searchDropDown);
-				
-				constraints.gridx = 2;
-				constraints.gridy = 0; 
-				constraints.gridwidth = 1;
-				constraints.gridheight = 1;
-			
+		temp.add(searchDropDown);
+		
+		constraints.gridx = 2;
+		constraints.gridy = 0; 
+		constraints.gridwidth = 1;
+		constraints.gridheight = 1;
+	
 		layout.setConstraints(searchTextField, constraints);
-				temp.add(searchTextField);
-				
-				
-				
-				constraints.gridx = 3;
-				constraints.gridy = 5; 
-				constraints.gridwidth = 1;
-				constraints.gridheight = 1;
-			
+		temp.add(searchTextField);
+		
+		
+		
+		constraints.gridx = 3;
+		constraints.gridy = 5; 
+		constraints.gridwidth = 1;
+		constraints.gridheight = 1;
+	
 		layout.setConstraints(actionLabel, constraints);
-				temp.add(actionLabel);
-				
-				
-				constraints.gridx = 0;
-				constraints.gridy = 1; 
-				constraints.gridwidth = 3;
-				constraints.gridheight = 3;
-			
+		temp.add(actionLabel);
+		
+		
+		constraints.gridx = 0;
+		constraints.gridy = 1; 
+		constraints.gridwidth = 3;
+		constraints.gridheight = 3;
+	
 		layout.setConstraints(searchResults, constraints);
-				temp.add(searchResults);
-				
+		temp.add(searchResults);
+		
 
-				constraints.gridx = 0;
-				constraints.gridy = 5; 
-				constraints.gridwidth = 1;
-				constraints.gridheight = 1;
-			
+		constraints.gridx = 0;
+		constraints.gridy = 5; 
+		constraints.gridwidth = 1;
+		constraints.gridheight = 1;
+	
 		layout.setConstraints(spaceLabel, constraints);
-				temp.add(spaceLabel);
-				
-				
-				
-				constraints.gridx = 0;
-				constraints.gridy = 6; 
-				constraints.gridwidth = 1;
-				constraints.gridheight = 1;
-			
+		temp.add(spaceLabel);
+		
+		
+		
+		constraints.gridx = 0;
+		constraints.gridy = 6; 
+		constraints.gridwidth = 1;
+		constraints.gridheight = 1;
+	
 		layout.setConstraints(myBooksLabel, constraints);
-				temp.add(myBooksLabel);
-				
-				constraints.gridx = 0;
-				constraints.gridy = 7; 
-				constraints.gridwidth = 3;
-				constraints.gridheight = 1;
-			
+		temp.add(myBooksLabel);
+		
+		constraints.gridx = 0;
+		constraints.gridy = 7; 
+		constraints.gridwidth = 3;
+		constraints.gridheight = 1;
+	
 		layout.setConstraints(myBooksTextArea, constraints);
-				temp.add(myBooksTextArea);
-				
-				
+		temp.add(myBooksTextArea);
+		
+		
 
-				constraints.gridx = 3;
-				constraints.gridy = 0; 
-				constraints.gridwidth = 1;
-				constraints.gridheight = 1;
-			
+		constraints.gridx = 3;
+		constraints.gridy = 0; 
+		constraints.gridwidth = 1;
+		constraints.gridheight = 1;
+	
 		layout.setConstraints(getFines, constraints);
-				temp.add(getFines);
-				
-				
+		temp.add(getFines);
+		
 
-				constraints.gridx = 4;
-				constraints.gridy = 0; 
-				constraints.gridwidth = 1;
-				constraints.gridheight = 1;
-			
+		constraints.gridx = 4;
+		constraints.gridy = 0; 
+		constraints.gridwidth = 1;
+		constraints.gridheight = 1;
+	
 		layout.setConstraints(showFines, constraints);
-				temp.add(showFines);
-				
-				
-				constraints.gridx = 4;
-				constraints.gridy = 5; 
-				constraints.gridwidth = 1;
-				constraints.gridheight = 1;
-			
+		temp.add(showFines);
+		
+		
+		constraints.gridx = 4;
+		constraints.gridy = 5; 
+		constraints.gridwidth = 1;
+		constraints.gridheight = 1;
+	
 		layout.setConstraints(actionsDropDown, constraints);
-				temp.add(actionsDropDown);
-				
-				constraints.gridx = 3;
-				constraints.gridy = 6; 
-				constraints.gridwidth = 1;
-				constraints.gridheight = 1;
-			
+		temp.add(actionsDropDown);
+		
+		constraints.gridx = 3;
+		constraints.gridy = 6; 
+		constraints.gridwidth = 1;
+		constraints.gridheight = 1;
+	
 		layout.setConstraints(idLabel, constraints);
-				temp.add(idLabel);
-				
-				
-				constraints.gridx = 4;
-				constraints.gridy = 6; 
-				constraints.gridwidth = 1;
-				constraints.gridheight = 1;
-			
+		temp.add(idLabel);
+		
+		constraints.gridx = 4;
+		constraints.gridy = 6; 
+		constraints.gridwidth = 1;
+		constraints.gridheight = 1;
+	
 		layout.setConstraints(idNumberInput, constraints);
-				temp.add(idNumberInput);
-				
-
-				
-
-				return temp;
+		temp.add(idNumberInput);
+							
+		return temp;
 	}
 	
 	//Creating the Librarian panel
 	public JPanel createLibrarianPanel()
 	{
 		//create all the buttons and stuff here and return the panel
-		JPanel temp = new JPanel();
+		JPanel temp = createCustomerPanel();
 		
 		//temp.setLayout(new GridLayout(1,4, 4, 4));
       	addBookNameLabel = new JLabel("Enter Book Name: ");
@@ -424,12 +419,8 @@ public class LibraryClient extends JPanel implements ActionListener, ItemListene
 						//now create the first library user
 						Library.userTable[0] = new Librarian(username, password);
 						
-						//switch to the customer panel
-						switchPanel(CUSTOMER);
-						
-						
-						//currentPanel = LIBRARIAN;
-						//panelObj = createLibrarianPanel();
+						//switch to the librarian panel
+						switchPanel(LIBRARIAN);
 						
 						popupBox("Initial Librarian Created.", "Information");
 					}
