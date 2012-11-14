@@ -105,8 +105,9 @@ class Library
 	{
 		int indexArray[] = new int[collectionSize];
 		int ctr=0;
+		
 		for(int i=1; i<=collectionSize; i++)
-		{
+		{			
 			if(name==collection[i].title)
 			{
 				indexArray[ctr]=i;

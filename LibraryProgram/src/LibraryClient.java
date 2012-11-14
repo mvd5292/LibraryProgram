@@ -59,6 +59,9 @@ public class LibraryClient extends JPanel implements ActionListener, ItemListene
 	private JLabel myBooksLabel;
 	private JComboBox searchDropDown;
 	private static final String[] SEARCHCATAGORIES = {"Author", "Genre", "Title"};
+	private static final int S_AUTHOR = 0;
+	private static final int S_GENRE = 1;
+	private static final int S_TITLE = 2;
 	private JTextField searchTextField;
 	private JTextArea searchResults;
 	private JTextArea myBooksTextArea;
@@ -75,25 +78,28 @@ public class LibraryClient extends JPanel implements ActionListener, ItemListene
 	///////////////////  VARIABLES FOR LIBRARIAN ////////////////////////
 	/////////////////////////////////////////////////////////////////////
 	
-	private JButton addBookNameButton;
-	private JTextField addBookName;
-	private JTextField addBookAuthor;
-	private JTextField addBookPageNumber;
-	private JTextField addBookGenre;
-	private JButton editBookNameButton;
-	private JTextField editBookName;
-	private JTextField editBookAuthor;
-	private JTextField editBookPageNumber;
-	private JTextField editBookGenre;
-	private JLabel addBookNameLabel;
-	private JLabel addBookAuthorLabel;
-	private JLabel addBookPageNumberLabel;
-	private JLabel addBookGenreLabel;
-	private JLabel editBookNameLabel;
-	private JLabel editBookAuthorLabel;
-	private JLabel editBookPageNumberLabel;
-	private JLabel editBookGenreLabel;	
-	
+	private JLabel librarianIdLabel;
+	private JTextField librarianGetId;
+	private JLabel libAuthorLabel;
+	private JTextField libGetAuthor;
+	private JLabel librarianTitle;
+	private JLabel libSpaceTitle;
+	private JButton libAddBookButton;
+	private JButton libEditBookButton;
+	private JLabel libGenreLabel;
+	private JTextField libGetGenre;
+	private JLabel libPageCountLabel;
+	private JTextField libGetPageCount;
+	private JLabel libTitleLabel;
+	private JTextField libGetTitle;
+	private JLabel libAddUserLabel;
+	private JLabel libNewUserName;
+	private JTextField libGetNewUserName;
+	private JLabel libNewPasswordLabel;
+	private JTextField libGetNewPassword;
+	private JCheckBox libIsLibrarian;
+	private JButton libAddNewUserButton;
+
 	//helper functions to create each panel
 	
 	//Creating the LogIn panel
@@ -182,7 +188,14 @@ public class LibraryClient extends JPanel implements ActionListener, ItemListene
 		//create all the buttons and stuff here and return the panel
 		JPanel temp = new JPanel();
 		
-		app.setSize(700,500);
+		if (currentPanel == LIBRARIAN)
+		{
+			app.setSize(900,600);
+		}
+		else
+		{
+			app.setSize(700,500);
+		}
 		
 				
 		GridBagLayout layout = new GridBagLayout();
@@ -208,6 +221,7 @@ public class LibraryClient extends JPanel implements ActionListener, ItemListene
 		idNumberInput.addActionListener(this);
 		
 		searchTextField = new JTextField(15);
+		searchTextField.addActionListener(this);
 		
 		showFines = new JTextField(15);
 		showFines.setEditable(false);
@@ -334,6 +348,208 @@ public class LibraryClient extends JPanel implements ActionListener, ItemListene
 	
 		layout.setConstraints(idNumberInput, constraints);
 		temp.add(idNumberInput);
+		
+		//add on if librarian
+		if(currentPanel == LIBRARIAN)
+		{
+			
+
+			librarianIdLabel = new JLabel("ID Number:");
+			librarianGetId = new JTextField(10);
+			libAuthorLabel = new JLabel("Author:");
+			libGetAuthor = new JTextField(15);
+			librarianTitle = new JLabel("Librarian Options");
+			libSpaceTitle = new JLabel("     ");
+			libAddBookButton = new JButton("Add Book");
+			libEditBookButton = new JButton("Edit Book");
+			libGenreLabel = new JLabel ("Genre:");
+			libGetGenre = new JTextField();
+			libPageCountLabel = new JLabel("Page Count:");
+			libGetPageCount = new JTextField();
+			libTitleLabel = new JLabel("Title:");
+			libGetTitle = new JTextField();
+			libAddUserLabel = new JLabel("Add User");
+			libNewUserName = new JLabel ("New username: ");
+			libGetNewUserName = new JTextField();
+			libNewPasswordLabel = new JLabel ("New Password:");
+			libGetNewPassword = new JTextField();
+			libIsLibrarian = new JCheckBox("Librarian");
+			libAddNewUserButton = new JButton("Add User");
+			
+			
+			constraints.gridx = 0;
+			constraints.gridy = 8; 
+			constraints.gridwidth = 1;
+			constraints.gridheight = 1;
+		
+			layout.setConstraints(libSpaceTitle, constraints);
+			temp.add(libSpaceTitle);
+			
+			constraints.gridx = 0;
+			constraints.gridy = 9; 
+			constraints.gridwidth = 1;
+			constraints.gridheight = 1;
+		
+			layout.setConstraints(librarianTitle, constraints);
+			temp.add(librarianTitle);
+			
+			
+			constraints.gridx = 0;
+			constraints.gridy = 10; 
+			constraints.gridwidth = 1;
+			constraints.gridheight = 1;
+		
+			layout.setConstraints(librarianIdLabel, constraints);
+			temp.add(librarianIdLabel);
+
+			constraints.gridx = 0;
+			constraints.gridy = 11; 
+			constraints.gridwidth = 1;
+			constraints.gridheight = 1;
+		
+			layout.setConstraints(librarianGetId, constraints);
+			temp.add(librarianGetId);
+			
+			constraints.gridx = 3;
+			constraints.gridy = 11; 
+			constraints.gridwidth = 1;
+			constraints.gridheight = 1;
+		
+			layout.setConstraints(libAuthorLabel, constraints);
+			temp.add(libAuthorLabel);
+			
+			constraints.gridx = 4;
+			constraints.gridy = 11; 
+			constraints.gridwidth = 1;
+			constraints.gridheight = 1;
+		
+			layout.setConstraints(libGetAuthor, constraints);
+			temp.add(libGetAuthor);
+			
+			constraints.gridx = 3;
+			constraints.gridy = 12; 
+			constraints.gridwidth = 1;
+			constraints.gridheight = 1;
+		
+			layout.setConstraints(libGenreLabel, constraints);
+			temp.add(libGenreLabel);
+			
+			constraints.gridx = 4;
+			constraints.gridy = 12; 
+			constraints.gridwidth = 1;
+			constraints.gridheight = 1;
+		
+			layout.setConstraints(libGetGenre, constraints);
+			temp.add(libGetGenre);
+			
+			constraints.gridx = 3;
+			constraints.gridy = 13; 
+			constraints.gridwidth = 1;
+			constraints.gridheight = 1;
+		
+			layout.setConstraints(libPageCountLabel, constraints);
+			temp.add(libPageCountLabel);
+			
+			constraints.gridx = 4;
+			constraints.gridy = 13; 
+			constraints.gridwidth = 1;
+			constraints.gridheight = 1;
+		
+			layout.setConstraints(libGetPageCount, constraints);
+			temp.add(libGetPageCount);
+
+			
+			constraints.gridx = 3;
+			constraints.gridy = 14; 
+			constraints.gridwidth = 1;
+			constraints.gridheight = 1;
+		
+			layout.setConstraints(libTitleLabel, constraints);
+			temp.add(libTitleLabel);
+			
+			constraints.gridx = 4;
+			constraints.gridy = 14; 
+			constraints.gridwidth = 1;
+			constraints.gridheight = 1;
+		
+			layout.setConstraints(libGetTitle, constraints);
+			temp.add(libGetTitle);
+		
+			
+			constraints.gridx = 0;
+			constraints.gridy = 12; 
+			constraints.gridwidth = 1;
+			constraints.gridheight = 1;
+		
+			layout.setConstraints(libAddBookButton, constraints);
+			temp.add(libAddBookButton);
+			
+			constraints.gridx = 0;
+			constraints.gridy = 13; 
+			constraints.gridwidth = 1;
+			constraints.gridheight = 1;
+		
+			layout.setConstraints(libEditBookButton, constraints);
+			temp.add(libEditBookButton);
+			
+			constraints.gridx = 0;
+			constraints.gridy = 15; 
+			constraints.gridwidth = 1;
+			constraints.gridheight = 1;
+		
+			layout.setConstraints(libAddUserLabel, constraints);
+			temp.add(libAddUserLabel);
+			
+			constraints.gridx = 0;
+			constraints.gridy = 16; 
+			constraints.gridwidth = 1;
+			constraints.gridheight = 1;
+		
+			layout.setConstraints(libNewUserName, constraints);
+			temp.add(libNewUserName);
+			
+			constraints.gridx = 1;
+			constraints.gridy = 16; 
+			constraints.gridwidth = 1;
+			constraints.gridheight = 1;
+		
+			layout.setConstraints(libGetNewUserName, constraints);
+			temp.add(libGetNewUserName);
+			
+			
+			constraints.gridx = 0;
+			constraints.gridy = 17; 
+			constraints.gridwidth = 1;
+			constraints.gridheight = 1;
+		
+			layout.setConstraints(libNewPasswordLabel, constraints);
+			temp.add(libNewPasswordLabel);
+			
+			constraints.gridx = 1;
+			constraints.gridy = 17; 
+			constraints.gridwidth = 1;
+			constraints.gridheight = 1;
+		
+			layout.setConstraints(libGetNewPassword, constraints);
+			temp.add(libGetNewPassword);
+			
+			constraints.gridx = 2;
+			constraints.gridy = 16; 
+			constraints.gridwidth = 1;
+			constraints.gridheight = 1;
+		
+			layout.setConstraints(libIsLibrarian, constraints);
+			temp.add(libIsLibrarian);
+			
+			constraints.gridx = 2;
+			constraints.gridy = 17; 
+			constraints.gridwidth = 1;
+			constraints.gridheight = 1;
+		
+			layout.setConstraints(libAddNewUserButton, constraints);
+			temp.add(libAddNewUserButton);
+			
+		}
 							
 		return temp;
 	}
@@ -343,234 +559,234 @@ public class LibraryClient extends JPanel implements ActionListener, ItemListene
 	{
 		//create all the buttons and stuff here and return the panel
 		JPanel temp = createCustomerPanel();
-		
-		//temp.setLayout(new GridLayout(1,4, 4, 4));
-      	addBookNameLabel = new JLabel("Enter Book Name: ");
-      	add(addBookNameLabel);
-      	addBookName = new JTextField(10);
-      	addBookName.addActionListener(this);
-      	add(addBookName);
-      	addBookAuthorLabel = new JLabel("Enter Author's Name: ");
-      	add(addBookAuthorLabel);
-      	addBookAuthor = new JTextField(10);
-      	addBookAuthor.addActionListener(this);
-      	add(addBookAuthor);
-      	addBookGenreLabel = new JLabel("Enter books Genre: ");
-      	add(addBookGenreLabel);
-      	addBookGenre = new JTextField(10);
-      	addBookGenre.addActionListener(this);
-      	add(addBookGenre);
-      	addBookPageNumberLabel = new JLabel("Enter number of page: ");
-      	add(addBookPageNumberLabel);
-      	addBookPageNumber = new JTextField(10);
-      	addBookPageNumber.addActionListener(this);
-      	add(addBookPageNumber);
-      	addBookNameButton = new JButton("Add Book");
-      	addBookNameButton.addActionListener(this);
-      	add(addBookNameButton);
-      	editBookNameLabel = new JLabel("Edit Book Name: ");
-      	add(editBookNameLabel);
-      	editBookName = new JTextField(10);
-      	editBookName.addActionListener(this);
-      	add(editBookName);
-      	editBookAuthorLabel = new JLabel("Edit Author's Name: ");
-      	add(editBookAuthorLabel);
-      	editBookAuthor = new JTextField(10);
-      	editBookAuthor.addActionListener(this);
-      	add(editBookAuthor);
-      	editBookGenreLabel = new JLabel("Edit books Genre: ");
-      	add(editBookGenreLabel);
-      	editBookGenre = new JTextField(10);
-      	editBookGenre.addActionListener(this);
-      	add(editBookGenre);
-      	editBookPageNumberLabel = new JLabel("Edit number of page: ");
-      	add(editBookPageNumberLabel);
-      	editBookPageNumber = new JTextField(10);
-      	editBookPageNumber.addActionListener(this);
-      	add(editBookPageNumber);
-      	editBookNameButton = new JButton("edit Book");
-      	editBookNameButton.addActionListener(this);
-      	add(editBookNameButton);
-		
-		return temp;
+		return temp; //dont do anything for now
 	}
 	
 	//Reactions to buttons
 	public void actionPerformed(ActionEvent e)
 	{
 		//Switch by panel; then react by button
-		switch(currentPanel)
-		{
-			//login screen. One button to handle; the "login" button.
-			case LOGIN:
+		//////////////////////////////////////////////////
+		//////// ACTION HANDLING FOR LOGIN SCREEN
+		//////////////////////////////////////////////////
+			//handle the login button
+			if ((e.getSource() == loginButton) || (e.getSource() == passwordField))
 			{
 				//handle the login button
-				if ((e.getSource() == loginButton) || (e.getSource() == passwordField))
+				
+				if (Library.userCount == 0)
 				{
-					//handle the login button
+					//initial user
+					username = usernameField.getText();
+					//getPassword returns a char[], and we need a String...
+					password = (passwordField.getPassword()).toString();
 					
-					if (Library.userCount == 0)
+					//now create the first library user
+					Library.userTable[0] = new Librarian(username, password);
+					
+					//switch to the librarian panel
+					switchPanel(LIBRARIAN);
+					
+					popupBox("Initial Librarian Created.", "Information");
+				}
+				else
+				{
+					//see if the username matches anyone preexisting.
+					//loop through users.
+					boolean failed = false;
+					
+					for(int i = 0; i < Library.userCount; i++)
 					{
-						//initial user
-						username = usernameField.getText();
-						//getPassword returns a char[], and we need a String...
-						password = (passwordField.getPassword()).toString();
-						
-						//now create the first library user
-						Library.userTable[0] = new Librarian(username, password);
-						
-						//switch to the librarian panel
-						switchPanel(LIBRARIAN);
-						
-						popupBox("Initial Librarian Created.", "Information");
-					}
-					else
-					{
-						//see if the username matches anyone preexisting.
-						//loop through users.
-						boolean failed = false;
-						
-						for(int i = 0; i < Library.userCount; i++)
+						if (Library.userTable[i].logIn(username, password))
 						{
-							if (Library.userTable[i].logIn(username, password))
+							//log in successful
+							failed = false;
+							
+							logged_user = i;
+							
+							//check if the user is a libraria
+							if (Library.userTable[i].isLibrarian)
 							{
-								//log in successful
-								failed = false;
-								
-								logged_user = i;
-								
-								//check if the user is a libraria
-								if (Library.userTable[i].isLibrarian)
-								{
-									//not sure if I have to delete this panel first
-									currentPanel = LIBRARIAN;
-									panelObj = createLibrarianPanel();
-								}
-								else
-								{
-									currentPanel = CUSTOMER;
-									panelObj = createCustomerPanel();
-								}
-								
-								break; //get out of the loop
+								//not sure if I have to delete this panel first
+								currentPanel = LIBRARIAN;
+								panelObj = createLibrarianPanel();
 							}
 							else
 							{
-								//incorrect!
-								failed = true;
+								currentPanel = CUSTOMER;
+								panelObj = createCustomerPanel();
 							}
+							
+							break; //get out of the loop
 						}
-						
-						if (failed)
+						else
 						{
-							popupBox("The username or password is incorrect.", "LOG IN FAILED");
+							//incorrect!
+							failed = true;
 						}
-					}//end needed to log in
+					}
 					
-				}//end loginbutton
+					if (failed)
+					{
+						popupBox("The username or password is incorrect.", "LOG IN FAILED");
+					}
+				}//end needed to log in
 				
-				break;
-			}
+			}//end loginbutton
+			
+
+			
 			
 			///////////////////////////////////////////////////////////////////////////////
 			///////////////////////////////////////////////////////////////////////////////
 			////////////   ACTION HANDLING FOR CUSTOMER INTERFACE   ///////////////////////
 			///////////////////////////////////////////////////////////////////////////////
-			case CUSTOMER:
+
+		
+			if(e.getSource() == getFines)
 			{
-				if(e.getSource() == getFines){
-					
-					totalFines = Library.userTable[logged_user].getTotalFine();
-					String stringFine = totalFines + "";
-					showFines.setText(stringFine);
-				}
+				totalFines = Library.userTable[logged_user].getTotalFine();
+				String stringFine = totalFines + "";
+				showFines.setText(stringFine);
+			}
+			
+			if(e.getSource() == idNumberInput)
+			{
+				switch(actionsDropDown.getSelectedIndex())
+				{
 				
-				if(e.getSource() == idNumberInput){
-					switch(actionsDropDown.getSelectedIndex())
+					case 0:
 					{
-					
-						case 0:
+						
+						if(Library.userTable[logged_user].checkOutBook(Integer.parseInt(idNumberInput.getText())))
 						{
-							
-							if(Library.userTable[logged_user].checkOutBook(Integer.parseInt(idNumberInput.getText())))
-							{
-								popupBox("The book was succesfully checked out!", "Checkout");
-							}
-							else
-							{
-								popupBox("Invalid ID Number", "Error");
-							}
-							
-							
+							popupBox("The book was succesfully checked out!", "Checkout");
 						}
-						case 1:
+						else
 						{
-							if(Library.userTable[logged_user].getWhenDue(Integer.parseInt(idNumberInput.getText())) == -1)
-							{
-								popupBox("Invalid ID Number", "Error");
-							}
-							else
-							{
-								popupBox("The due date is:" + Library.userTable[logged_user].getWhenDue(Integer.parseInt(idNumberInput.getText())), "Due Date" );
-							}
-							
-							
-						}
-						case 2:
-						{
-							if(Library.userTable[logged_user].putOnHold(Integer.parseInt(idNumberInput.getText())))
-							{
-								popupBox("The book was succesfully put on hold!", "Hold");
-							}
-							else
-							{
-								popupBox("Invalid ID Number", "Error");
-							}
-							
-						}
-						case 3:
-						{
-							if(Library.userTable[logged_user].renewBook(Integer.parseInt(idNumberInput.getText())))
-							{
-								popupBox("The book was successfully renewd", "Renew");
-							}
-							else
-							{
-								popupBox("Invalid ID Number", "Error");
-							}
-							
-						}
-						case 4:
-						{
-							if(Library.userTable[logged_user].returnBook(Integer.parseInt(idNumberInput.getText())))
-							{
-								popupBox("The book was successfully returned", "Return");
-							}
-							else
-							{
-								popupBox("Invalid ID Number", "Error");
-							}
+							popupBox("Invalid ID Number", "Error");
 						}
 						
+						
+					}
+					case 1:
+					{
+						if(Library.userTable[logged_user].getWhenDue(Integer.parseInt(idNumberInput.getText())) == -1)
+						{
+							popupBox("Invalid ID Number", "Error");
+						}
+						else
+						{
+							popupBox("The due date is:" + Library.userTable[logged_user].getWhenDue(Integer.parseInt(idNumberInput.getText())), "Due Date" );
+						}
+						
+						
+					}
+					case 2:
+					{
+						if(Library.userTable[logged_user].putOnHold(Integer.parseInt(idNumberInput.getText())))
+						{
+							popupBox("The book was succesfully put on hold!", "Hold");
+						}
+						else
+						{
+							popupBox("Invalid ID Number", "Error");
+						}
+						
+					}
+					case 3:
+					{
+						if(Library.userTable[logged_user].renewBook(Integer.parseInt(idNumberInput.getText())))
+						{
+							popupBox("The book was successfully renewd", "Renew");
+						}
+						else
+						{
+							popupBox("Invalid ID Number", "Error");
+						}
+						
+					}
+					case 4:
+					{
+						if(Library.userTable[logged_user].returnBook(Integer.parseInt(idNumberInput.getText())))
+						{
+							popupBox("The book was successfully returned", "Return");
+						}
+						else
+						{
+							popupBox("Invalid ID Number", "Error");
+						}
+					}
 					
-					}//end switch
-					
-					
-				}
-			}
 				
-				break;
+				}//end switch
+				
+				
+			}//end idnumber input
+			
+			
+			///////////////////////////////////////////////////////
+			//// SEARCHING - (zach kehs)
+			//TODO
+			//test searching
+			if (e.getSource() == searchTextField)
+			{
+				//the user is running a search
+				int[] results = new int[Library.collectionSize];
+				
+				//switch based on the drop down
+				switch(searchDropDown.getSelectedIndex())
+				{
+					case S_GENRE:
+					{
+						results = Library.searchBySubject(searchTextField.getText());
+						break;
+					}
+					case S_TITLE:
+					{
+						popupBox("Passing {" + searchTextField.getText() + "}", "");
+						results = Library.searchByName(searchTextField.getText());
+						break;
+					}
+					case S_AUTHOR:
+					{
+						results = Library.searchByAuthor(searchTextField.getText());
+						break;
+					}
+				}//end switch
+				
+				
+				//now we need to paste the results into the text area
+				//String[] formattedResults = new String[Library.collectionSize];
+				String formattedResults = "";
+				int count = 0;
+				
+				for(int i = 0; i < Library.collectionSize; i++)
+				{
+					popupBox("Result " + i + " is " + results[i], "");
+					//check if this slot is filled
+					if (results[i] > 0) //0 is an empty result
+					{
+						formattedResults += "\nID: " + results[i] + "\t" + Library.collection[results[i]].title + "\t" + Library.collection[results[i]].author; 
+						count++;
+					}
+					
+				}//end for
+				
+				//and now set the text
+				searchResults.setText(formattedResults);
+				
+				popupBox("Search complete! " + count + " results found.", "Results");
+				
+			}//text field enter
+				
 			
 			///////////////////////////////////////////////////////////////////////////////
 			///////////////////////////////////////////////////////////////////////////////
 			////////////   ACTION HANDLING FOR LIBRARIAN INTERFACE   ///////////////////////
 			///////////////////////////////////////////////////////////////////////////////
-			case LIBRARIAN:
-			{
-				
-				break;
-			}
-		}
+
+		
 	}
 	
 	
@@ -613,7 +829,6 @@ public class LibraryClient extends JPanel implements ActionListener, ItemListene
 	{
 		//start the program from here because the main runs in a static context
 		//LibraryClient panel = new LibraryClient();
-		
 		app = new JFrame();
 		
 		//app is created before the panel so taht we can change the size from within the panel
@@ -669,29 +884,73 @@ public class LibraryClient extends JPanel implements ActionListener, ItemListene
 	public void createData()
 	{
 		//creates the library data. later this will be moved to a SQL server
-		Library.collection[Library.collectionSize] = new Book();
-		Library.collection[Library.collectionSize].title = "Harry Potter 1";
-		Library.collection[Library.collectionSize].author = "J. K. Rowling";
-		Library.collection[Library.collectionSize].subject = "fantasy";
-		Library.collection[Library.collectionSize].pagecount = 326;
-		Library.collectionSize++;
-		Library.collection[Library.collectionSize] = new Book();
-		Library.collection[Library.collectionSize].title = "The Great Gatsby";
-		Library.collection[Library.collectionSize].author = "F. Scott Fitzgerald";
-		Library.collection[Library.collectionSize].subject = "fiction";
-		Library.collection[Library.collectionSize].pagecount = 123;
-		Library.collectionSize++;
-		Library.collection[Library.collectionSize] = new Book();
-		Library.collection[Library.collectionSize].title = "Lord of the Rings";
-		Library.collection[Library.collectionSize].author = "JRR Tolkein";
-		Library.collection[Library.collectionSize].subject = "fantasy";
-		Library.collection[Library.collectionSize].pagecount = 311;
+				Library.collection[Library.collectionSize] = new Book();
+				Library.collection[Library.collectionSize].title = "Harry Potter 1";
+				Library.collection[Library.collectionSize].author = "J. K. Rowling";
+				Library.collection[Library.collectionSize].subject = "fantasy";
+				Library.collection[Library.collectionSize].pagecount = 326;
+				Library.collectionSize++;
+				Library.collection[Library.collectionSize] = new Book();
+				Library.collection[Library.collectionSize].title = "The Great Gatsby";
+				Library.collection[Library.collectionSize].author = "F. Scott Fitzgerald";
+				Library.collection[Library.collectionSize].subject = "fiction";
+				Library.collection[Library.collectionSize].pagecount = 123;
+				Library.collectionSize++;
+				Library.collection[Library.collectionSize] = new Book();
+				Library.collection[Library.collectionSize].title = "Lord of the Rings";
+				Library.collection[Library.collectionSize].author = "JRR Tolkein";
+				Library.collection[Library.collectionSize].subject = "fantasy";
+				Library.collection[Library.collectionSize].pagecount = 311;
+				Library.collectionSize++;
+				Library.collection[Library.collectionSize] = new Book();
+				Library.collection[Library.collectionSize].title = "Catcher in the Rye";
+				Library.collection[Library.collectionSize].author = "J.D. Salinger";
+				Library.collection[Library.collectionSize].subject = "Novel";
+				Library.collection[Library.collectionSize].pagecount = 231;
+				Library.collectionSize++;
+				Library.collection[Library.collectionSize] = new Book();
+				Library.collection[Library.collectionSize].title = "Harry Potter and the Chamber of Secrets";
+				Library.collection[Library.collectionSize].author = "J. K. Rowling";
+				Library.collection[Library.collectionSize].subject = "fantasy";
+				Library.collection[Library.collectionSize].pagecount = 399;
+				Library.collectionSize++;
+				Library.collection[Library.collectionSize] = new Book();
+				Library.collection[Library.collectionSize].title = "Paterno";
+				Library.collection[Library.collectionSize].author = "Joe Posnaski";
+				Library.collection[Library.collectionSize].subject = "Biography";
+				Library.collection[Library.collectionSize].pagecount = 267;
+				Library.collectionSize++;
+				Library.collection[Library.collectionSize] = new Book();
+				Library.collection[Library.collectionSize].title = "I am America(And so can you)";
+				Library.collection[Library.collectionSize].author = "Stephen Colbert";
+				Library.collection[Library.collectionSize].subject = "Satirical";
+				Library.collection[Library.collectionSize].pagecount = 184;
+				Library.collectionSize++;
+				Library.collection[Library.collectionSize] = new Book();
+				Library.collection[Library.collectionSize].title = "America (The Book)";
+				Library.collection[Library.collectionSize].author = "Stephen Colbert";
+				Library.collection[Library.collectionSize].subject = "Satirical";
+				Library.collection[Library.collectionSize].pagecount = 467;
+				Library.collectionSize++;
+				Library.collection[Library.collectionSize] = new Book();
+				Library.collection[Library.collectionSize].title = "Green Hams and Eggs";
+				Library.collection[Library.collectionSize].author = "Dr. Seuss";
+				Library.collection[Library.collectionSize].subject = "Childrens Book";
+				Library.collection[Library.collectionSize].pagecount = 13;
+				Library.collectionSize++;
+				Library.collection[Library.collectionSize] = new Book();
+				Library.collection[Library.collectionSize].title = "A Tale of two Cities";
+				Library.collection[Library.collectionSize].author = "Charles Dickens";
+				Library.collection[Library.collectionSize].subject = "Historical Novel";
+				Library.collection[Library.collectionSize].pagecount = 379;
 	}
 	
 	
 	public LibraryClient()
 	{
 		super();
+		
+		createData(); //create the library for us to use
 
 		//set all the default values
 		usercount = 0;
@@ -702,7 +961,6 @@ public class LibraryClient extends JPanel implements ActionListener, ItemListene
 		
 		add(panelObj);
 		
-		createData(); //create the library for us to use
 		
 		//switching to other panels should be handled in button presses
 		
@@ -839,7 +1097,7 @@ public class LibraryClient extends JPanel implements ActionListener, ItemListene
 						
 						//we can overwrite userinput now because we already checked the value for the switch
 						userinput = input.nextInt();
-						
+						TODO
 						int[] results = new int[Library.collectionSize];
 						
 						//now do another switch...
