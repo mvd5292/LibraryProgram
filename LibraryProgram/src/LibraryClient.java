@@ -76,6 +76,24 @@ public class LibraryClient extends JPanel implements ActionListener, ItemListene
 	///////////////////  VARIABLES FOR LIBRARIAN ////////////////////////
 	/////////////////////////////////////////////////////////////////////
 	
+	private JButton addBookNameButton;
+	private JTextField addBookName;
+	private JTextField addBookAuthor;
+	private JTextField addBookPageNumber;
+	private JTextField addBookGenre;
+	private JButton editBookNameButton;
+	private JTextField editBookName;
+	private JTextField editBookAuthor;
+	private JTextField editBookPageNumber;
+	private JTextField editBookGenre;
+	private JLabel addBookNameLabel;
+	private JLabel addBookAuthorLabel;
+	private JLabel addBookPageNumberLabel;
+	private JLabel addBookGenreLabel;
+	private JLabel editBookNameLabel;
+	private JLabel editBookAuthorLabel;
+	private JLabel editBookPageNumberLabel;
+	private JLabel editBookGenreLabel;	
 	
 	//helper functions to create each panel
 	
@@ -471,7 +489,7 @@ public class LibraryClient extends JPanel implements ActionListener, ItemListene
 			{
 				if(e.getSource() == getFines){
 					
-					totalFines = Library.userTable[logged_user].GetTotalFine();
+					totalFines = Library.userTable[logged_user].getTotalFine();
 					String stringFine = totalFines + "";
 					showFines.setText(stringFine);
 				}
@@ -483,7 +501,7 @@ public class LibraryClient extends JPanel implements ActionListener, ItemListene
 						case 0:
 						{
 							
-							if(Library.userTable[logged_user].CheckOutBook(Integer.parseInt(idNumberInput.getText())))
+							if(Library.userTable[logged_user].checkOutBook(Integer.parseInt(idNumberInput.getText())))
 							{
 								popupBox("The book was succesfully checked out!", "Checkout");
 							}
@@ -496,20 +514,20 @@ public class LibraryClient extends JPanel implements ActionListener, ItemListene
 						}
 						case 1:
 						{
-							if(Library.userTable[logged_user].GetWhenDue(Integer.parseInt(idNumberInput.getText())) == -1)
+							if(Library.userTable[logged_user].getWhenDue(Integer.parseInt(idNumberInput.getText())) == -1)
 							{
 								popupBox("Invalid ID Number", "Error");
 							}
 							else
 							{
-								popupBox("The due date is:" + Library.userTable[logged_user].GetWhenDue(Integer.parseInt(idNumberInput.getText())), "Due Date" );
+								popupBox("The due date is:" + Library.userTable[logged_user].getWhenDue(Integer.parseInt(idNumberInput.getText())), "Due Date" );
 							}
 							
 							
 						}
 						case 2:
 						{
-							if(Library.userTable[logged_user].PutOnHold(Integer.parseInt(idNumberInput.getText())))
+							if(Library.userTable[logged_user].putOnHold(Integer.parseInt(idNumberInput.getText())))
 							{
 								popupBox("The book was succesfully put on hold!", "Hold");
 							}
@@ -521,7 +539,7 @@ public class LibraryClient extends JPanel implements ActionListener, ItemListene
 						}
 						case 3:
 						{
-							if(Library.userTable[logged_user].RenewBook(Integer.parseInt(idNumberInput.getText())))
+							if(Library.userTable[logged_user].renewBook(Integer.parseInt(idNumberInput.getText())))
 							{
 								popupBox("The book was successfully renewd", "Renew");
 							}
@@ -533,7 +551,7 @@ public class LibraryClient extends JPanel implements ActionListener, ItemListene
 						}
 						case 4:
 						{
-							if(Library.userTable[logged_user].ReturnBook(Integer.parseInt(idNumberInput.getText())))
+							if(Library.userTable[logged_user].returnBook(Integer.parseInt(idNumberInput.getText())))
 							{
 								popupBox("The book was successfully returned", "Return");
 							}
@@ -544,10 +562,11 @@ public class LibraryClient extends JPanel implements ActionListener, ItemListene
 						}
 						
 					
-					}
+					}//end switch
 					
 					
 				}
+			}
 				
 				break;
 			
