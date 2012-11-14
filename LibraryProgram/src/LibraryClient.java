@@ -29,9 +29,8 @@ public class LibraryClient extends JPanel implements ActionListener, ItemListene
 	
 	private int currentPanel; //this is a numbering system for the panel so we know what one to use
 	private JPanel panelObj; //this is the current panel we are using
-	private int userinput;
 	private int usercount;
-	private String username, password, stringinput;
+	private String username, password;
 	private int logged_user;
 	
 	/////////////////////////////////////////////////////////////////////
@@ -405,7 +404,7 @@ public class LibraryClient extends JPanel implements ActionListener, ItemListene
 			case LOGIN:
 			{
 				//handle the login button
-				if (e.getSource() == loginButton)
+				if ((e.getSource() == loginButton) || (e.getSource() == passwordField))
 				{
 					//handle the login button
 					
@@ -623,8 +622,6 @@ public class LibraryClient extends JPanel implements ActionListener, ItemListene
 		//make it exit when you close
 		app.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-		//add panel and start
-		//app.setSize(260,170);
 		app.setResizable(false);
 		app.setVisible(true);
 		app.setTitle("Library System");
@@ -669,12 +666,35 @@ public class LibraryClient extends JPanel implements ActionListener, ItemListene
 		add(panelObj);
 	}
 	
+	
+	public void createData()
+	{
+		//creates the library data. later this will be moved to a SQL server
+		Library.collection[Library.collectionSize] = new Book();
+		Library.collection[Library.collectionSize].title = "Harry Potter 1";
+		Library.collection[Library.collectionSize].author = "J. K. Rowling";
+		Library.collection[Library.collectionSize].subject = "fantasy";
+		Library.collection[Library.collectionSize].pagecount = 326;
+		Library.collectionSize++;
+		Library.collection[Library.collectionSize] = new Book();
+		Library.collection[Library.collectionSize].title = "The Great Gatsby";
+		Library.collection[Library.collectionSize].author = "F. Scott Fitzgerald";
+		Library.collection[Library.collectionSize].subject = "fiction";
+		Library.collection[Library.collectionSize].pagecount = 123;
+		Library.collectionSize++;
+		Library.collection[Library.collectionSize] = new Book();
+		Library.collection[Library.collectionSize].title = "Lord of the Rings";
+		Library.collection[Library.collectionSize].author = "JRR Tolkein";
+		Library.collection[Library.collectionSize].subject = "fantasy";
+		Library.collection[Library.collectionSize].pagecount = 311;
+	}
+	
+	
 	public LibraryClient()
 	{
 		super();
 
 		//set all the default values
-		userinput = 0;
 		usercount = 0;
 		logged_user = 0;
 
@@ -682,6 +702,8 @@ public class LibraryClient extends JPanel implements ActionListener, ItemListene
 		panelObj = createLogInPanel(); //done.
 		
 		add(panelObj);
+		
+		createData(); //create the library for us to use
 		
 		//switching to other panels should be handled in button presses
 		
