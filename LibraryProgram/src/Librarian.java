@@ -58,12 +58,13 @@ class Librarian extends User
 	{
 		try
 		{
+			Library.collectionSize++;
 			Library.collection[Library.collectionSize] = new Book();
-			Library.collection[Library.collectionSize].title=title;
+			Library.collection[Library.collectionSize].title = title;
 			Library.collection[Library.collectionSize].author = author;
 			Library.collection[Library.collectionSize].subject = subject;
 			Library.collection[Library.collectionSize].pagecount = pageCount;
-			Library.collectionSize++;
+			//Library.collectionSize++;
 		}
 		catch(ArrayIndexOutOfBoundsException aioobe)
 		{
@@ -75,12 +76,13 @@ class Librarian extends User
 	@Override
 	void addBook(String title, String author)
 	{
+		Library.collectionSize++;
 		Library.collection[Library.collectionSize] = new Book();
-		Library.collection[Library.collectionSize].title=title;
+		Library.collection[Library.collectionSize].title = title;
 		Library.collection[Library.collectionSize].author = author;
 		Library.collection[Library.collectionSize].subject = "";
 		Library.collection[Library.collectionSize].pagecount = -1;
-		Library.collectionSize++;
+		//Library.collectionSize++;
 	}
 	
 	//This function takes in the index of the book name to be changed and the title it should be changed to and it changes it. 

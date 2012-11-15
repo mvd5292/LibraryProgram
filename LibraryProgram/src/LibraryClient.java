@@ -483,6 +483,7 @@ public class LibraryClient extends JPanel implements ActionListener, ItemListene
 			constraints.gridheight = 1;
 		
 			layout.setConstraints(libAddBookButton, constraints);
+			libAddBookButton.addActionListener(this);
 			temp.add(libAddBookButton);
 			
 			constraints.gridx = 0;
@@ -491,6 +492,7 @@ public class LibraryClient extends JPanel implements ActionListener, ItemListene
 			constraints.gridheight = 1;
 		
 			layout.setConstraints(libEditBookButton, constraints);
+			libEditBookButton.addActionListener(this);
 			temp.add(libEditBookButton);
 			
 			constraints.gridx = 0;
@@ -664,7 +666,7 @@ public class LibraryClient extends JPanel implements ActionListener, ItemListene
 						}
 						else
 						{
-							popupBox("Invalid ID Number", "Error");
+							popupBox("Error checking out!\nThe ID was invalid OR\nYou might have the book already.", "Error");
 						}
 						
 						break;
@@ -673,7 +675,7 @@ public class LibraryClient extends JPanel implements ActionListener, ItemListene
 					{
 						if(Library.userTable[logged_user].getWhenDue(Integer.parseInt(idNumberInput.getText())) == -1)
 						{
-							popupBox("Invalid ID Number", "Error");
+							popupBox("Error fetching due date!\nThe ID was invalid OR\nYou might not have the book checked out.", "Error");
 						}
 						else
 						{
@@ -690,7 +692,7 @@ public class LibraryClient extends JPanel implements ActionListener, ItemListene
 						}
 						else
 						{
-							popupBox("Invalid ID Number", "Error");
+							popupBox("Error putting on hold!\nThe ID was invalid OR\nYou might have the book already.", "Error");
 						}
 						break;
 					}
@@ -702,7 +704,7 @@ public class LibraryClient extends JPanel implements ActionListener, ItemListene
 						}
 						else
 						{
-							popupBox("Invalid ID Number", "Error");
+							popupBox("Error renewing!\nThe ID was invalid OR\nYou might have too many days left.", "Error");
 						}
 						break;
 					}
@@ -714,7 +716,7 @@ public class LibraryClient extends JPanel implements ActionListener, ItemListene
 						}
 						else
 						{
-							popupBox("Invalid ID Number", "Error");
+							popupBox("Error returning!\nThe ID was invalid OR\nYou might have not have the book checked out.", "Error");
 						}
 						break;
 					}
@@ -782,10 +784,28 @@ public class LibraryClient extends JPanel implements ActionListener, ItemListene
 			////////////   ACTION HANDLING FOR LIBRARIAN INTERFACE   ///////////////////////
 			///////////////////////////////////////////////////////////////////////////////
 
+			//TODO
 			if(e.getSource() == libAddBookButton)
 			{
-				Library.userTable[logged_user].addBook(libGetTitle.getText(), libGetAuthor.getText(), libGetGenre.getText(), Integer.parseInt(libGetPageCount.getText()));
+				//popupBox("Book " + Library.collectionSize + " is " + Library.collection[Library.collectionSize], "");
+				if (libGetPageCount.getText().length() == 0)
+				{
+					//they left it blank
+					libGetPageCount.setText("-1");
+				}
+				
+				if ((libGetTitle.getText().length() != 0) && (libGetAuthor.getText().length() != 0))
+				{
+					Library.userTable[logged_user].addBook(libGetTitle.getText(), libGetAuthor.getText(), libGetGenre.getText(), Integer.parseInt(libGetPageCount.getText()));
+					popupBox("Book Added!", "Information");
+				}
+				else
+				{
+					popupBox("Book not added: Invalid information!", "Error");
+				}
+				
 			}
+			
 			else if(e.getSource () == libEditBookButton)
 			{
 				if(libGetTitle.getText()!="")
@@ -800,6 +820,7 @@ public class LibraryClient extends JPanel implements ActionListener, ItemListene
 				{
 					Library.userTable[logged_user].changeBookSubject(Integer.parseInt(librarianGetId.getText()), libGetGenre.getText());
 				}
+				popupBox("Book Edited!", "Information");
 			}
 			if(e.getSource() == libAddNewUserButton)
 			{
