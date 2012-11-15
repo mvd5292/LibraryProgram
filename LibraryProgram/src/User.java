@@ -80,6 +80,10 @@ public abstract class User
 	*/
 	public boolean checkOutBook(int i)
 	{
+		if ((i > Library.collectionSize) || (i <= 0))
+		{
+			return false;
+		}
 		//first check if the book has no holder
 		if((Library.collection[i].holder == "") || (Library.collection[i].onHold && Library.collection[i].holder == username))
 		{
@@ -110,6 +114,10 @@ public abstract class User
 	*/
 	public boolean putOnHold(int i)
 	{
+		if ((i > Library.collectionSize) || (i <= 0))
+		{
+			return false;
+		}
 		//first check if the book has no holder
 		if((Library.collection[i].holder == "") || (Library.collection[i].onHold && Library.collection[i].holder == username))
 		{
@@ -139,6 +147,10 @@ public abstract class User
 	*/
 	public boolean returnBook(int i)
 	{
+		if ((i > Library.collectionSize) || (i <= 0))
+		{
+			return false;
+		}
 		//make sure we're trying to return a book we checked out in the first place
 		if (Library.collection[i].holder == username)
 		{
@@ -167,6 +179,10 @@ public abstract class User
 	*/
 	public boolean renewBook(int i)
 	{
+		if ((i > Library.collectionSize) || (i <= 0))
+		{
+			return false;
+		}
 		//You can't renew a book if it isn't checked out or if it isn't due for another week.
 		if ((Library.collection[i].holder == username) && (!Library.collection[i].onHold) && (Library.collection[i].dateDue < Library.currentDate + 7))
 		{

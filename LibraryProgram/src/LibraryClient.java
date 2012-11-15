@@ -575,66 +575,75 @@ public class LibraryClient extends JPanel implements ActionListener, ItemListene
 			//handle the login button
 			if ((e.getSource() == loginButton) || (e.getSource() == passwordField))
 			{
+				String passwordentered = new String(passwordField.getPassword());
 				//handle the login button
-				
-				if (Library.userCount == 0)
+
+				if ((usernameField.getText().length() == 0) || (passwordentered.length() == 0))
 				{
-					//initial user
-					username = usernameField.getText();
-					//getPassword returns a char[], and we need a String...
-					password = (passwordField.getPassword()).toString();
-					
-					//now create the first library user
-					Library.userTable[Library.userCount] = new Librarian(username, password);
-					Library.userCount++;
-					
-					//switch to the librarian panel
-					switchPanel(LIBRARIAN);
-					
-					popupBox("Initial Librarian Created.", "Information");
+					popupBox("Invalid Entry!", "Error");
 				}
 				else
 				{
-					//see if the username matches anyone preexisting.
-					//loop through users.
-					boolean failed = false;
 					
-					for(int i = 0; i < Library.userCount; i++)
+					if (Library.userCount == 0)
 					{
-						if (Library.userTable[i].logIn(username, password))
+						//initial user
+						username = usernameField.getText();
+						//getPassword returns a char[], and we need a String...
+						password = passwordentered;
+						
+						//now create the first library user
+						Library.userTable[Library.userCount] = new Librarian(username, password);
+						Library.userCount++;
+						
+						//switch to the librarian panel
+						switchPanel(LIBRARIAN);
+						
+						popupBox("Initial Librarian Created.", "Information");
+					}
+					else
+					{
+						//see if the username matches anyone preexisting.
+						//loop through users.
+						boolean failed = false;
+						
+						for(int i = 0; i < Library.userCount; i++)
 						{
-							//log in successful
-							failed = false;
-							
-							logged_user = i;
-							
-							//check if the user is a libraria
-							if (Library.userTable[i].isLibrarian)
+							if (Library.userTable[i].logIn(username, password))
 							{
-								//not sure if I have to delete this panel first
-								currentPanel = LIBRARIAN;
-								panelObj = createLibrarianPanel();
+								//log in successful
+								failed = false;
+								
+								logged_user = i;
+								
+								//check if the user is a libraria
+								if (Library.userTable[i].isLibrarian)
+								{
+									//not sure if I have to delete this panel first
+									currentPanel = LIBRARIAN;
+									panelObj = createLibrarianPanel();
+								}
+								else
+								{
+									currentPanel = CUSTOMER;
+									panelObj = createCustomerPanel();
+								}
+								
+								break; //get out of the loop
 							}
 							else
 							{
-								currentPanel = CUSTOMER;
-								panelObj = createCustomerPanel();
+								//incorrect!
+								failed = true;
 							}
-							
-							break; //get out of the loop
 						}
-						else
+						
+						if (failed)
 						{
-							//incorrect!
-							failed = true;
+							popupBox("The username or password is incorrect.", "LOG IN FAILED");
 						}
-					}
-					
-					if (failed)
-					{
-						popupBox("The username or password is incorrect.", "LOG IN FAILED");
-					}
-				}//end needed to log in
+					}//end needed to log in
+				}//end valid
 				
 			}//end loginbutton
 			
@@ -654,75 +663,85 @@ public class LibraryClient extends JPanel implements ActionListener, ItemListene
 			
 			if(e.getSource() == idNumberInput)
 			{
-				switch(actionsDropDown.getSelectedIndex())
+				try
 				{
 				
-					case 0:
-					{
-						
-						if(Library.userTable[logged_user].checkOutBook(Integer.parseInt(idNumberInput.getText())))
-						{
-							popupBox("The book was succesfully checked out!", "Checkout");
-						}
-						else
-						{
-							popupBox("Error checking out!\nThe ID was invalid OR\nYou might have the book already.", "Error");
-						}
-						
-						break;
-					}
-					case 1:
-					{
-						if(Library.userTable[logged_user].getWhenDue(Integer.parseInt(idNumberInput.getText())) == -1)
-						{
-							popupBox("Error fetching due date!\nThe ID was invalid OR\nYou might not have the book checked out.", "Error");
-						}
-						else
-						{
-							popupBox("The due date is:" + Library.userTable[logged_user].getWhenDue(Integer.parseInt(idNumberInput.getText())), "Due Date" );
-						}
-						
-						break;
-					}
-					case 2:
-					{
-						if(Library.userTable[logged_user].putOnHold(Integer.parseInt(idNumberInput.getText())))
-						{
-							popupBox("The book was succesfully put on hold!", "Hold");
-						}
-						else
-						{
-							popupBox("Error putting on hold!\nThe ID was invalid OR\nYou might have the book already.", "Error");
-						}
-						break;
-					}
-					case 3:
-					{
-						if(Library.userTable[logged_user].renewBook(Integer.parseInt(idNumberInput.getText())))
-						{
-							popupBox("The book was successfully renewd", "Renew");
-						}
-						else
-						{
-							popupBox("Error renewing!\nThe ID was invalid OR\nYou might have too many days left.", "Error");
-						}
-						break;
-					}
-					case 4:
-					{
-						if(Library.userTable[logged_user].returnBook(Integer.parseInt(idNumberInput.getText())))
-						{
-							popupBox("The book was successfully returned", "Return");
-						}
-						else
-						{
-							popupBox("Error returning!\nThe ID was invalid OR\nYou might have not have the book checked out.", "Error");
-						}
-						break;
-					}
 					
-				
-				}//end switch
+					switch(actionsDropDown.getSelectedIndex())
+					{
+					
+						case 0:
+						{
+							
+							if(Library.userTable[logged_user].checkOutBook(Integer.parseInt(idNumberInput.getText())))
+							{
+								popupBox("The book was succesfully checked out!", "Checkout");
+							}
+							else
+							{
+								popupBox("Error checking out!\nThe ID was invalid OR\nYou might have the book already.", "Error");
+							}
+							
+							break;
+						}
+						case 1:
+						{
+							if(Library.userTable[logged_user].getWhenDue(Integer.parseInt(idNumberInput.getText())) == -1)
+							{
+								popupBox("Error fetching due date!\nThe ID was invalid OR\nYou might not have the book checked out.", "Error");
+							}
+							else
+							{
+								popupBox("The due date is:" + Library.userTable[logged_user].getWhenDue(Integer.parseInt(idNumberInput.getText())), "Due Date" );
+							}
+							
+							break;
+						}
+						case 2:
+						{
+							if(Library.userTable[logged_user].putOnHold(Integer.parseInt(idNumberInput.getText())))
+							{
+								popupBox("The book was succesfully put on hold!", "Hold");
+							}
+							else
+							{
+								popupBox("Error putting on hold!\nThe ID was invalid OR\nYou might have the book already.", "Error");
+							}
+							break;
+						}
+						case 3:
+						{
+							if(Library.userTable[logged_user].renewBook(Integer.parseInt(idNumberInput.getText())))
+							{
+								popupBox("The book was successfully renewd", "Renew");
+							}
+							else
+							{
+								popupBox("Error renewing!\nThe ID was invalid OR\nYou might have too many days left.", "Error");
+							}
+							break;
+						}
+						case 4:
+						{
+							if(Library.userTable[logged_user].returnBook(Integer.parseInt(idNumberInput.getText())))
+							{
+								popupBox("The book was successfully returned", "Return");
+							}
+							else
+							{
+								popupBox("Error returning!\nThe ID was invalid OR\nYou might have not have the book checked out.", "Error");
+							}
+							break;
+						}
+						
+					
+					}//end switch
+				}//end try
+				catch(NumberFormatException ex)
+				{
+					popupBox("The ID number you entered was invalid.", "ERROR");
+					idNumberInput.setText(""); //clear it
+				}
 				
 				
 			}//end idnumber input
@@ -788,6 +807,17 @@ public class LibraryClient extends JPanel implements ActionListener, ItemListene
 			if(e.getSource() == libAddBookButton)
 			{
 				//popupBox("Book " + Library.collectionSize + " is " + Library.collection[Library.collectionSize], "");
+				try
+				{
+					int a = Integer.parseInt(libGetPageCount.getText());
+				}
+				catch(NumberFormatException ex)
+				{
+					popupBox("The page number you entered wasn't valid,\nso we changed it to a -1.", "Information");
+					libGetPageCount.setText("-1");
+				}
+				
+				
 				if (libGetPageCount.getText().length() == 0)
 				{
 					//they left it blank
@@ -808,19 +838,28 @@ public class LibraryClient extends JPanel implements ActionListener, ItemListene
 			
 			else if(e.getSource () == libEditBookButton)
 			{
-				if(libGetTitle.getText()!="")
+				//test the ID
+				try
 				{
-					Library.userTable[logged_user].changeBookTitle(Integer.parseInt(librarianGetId.getText()), libGetTitle.getText());
+					if(libGetTitle.getText()!="")
+					{
+						Library.userTable[logged_user].changeBookTitle(Integer.parseInt(librarianGetId.getText()), libGetTitle.getText());
+					}
+					if(libGetAuthor.getText()!="")
+					{
+						Library.userTable[logged_user].changeBookAuthor(Integer.parseInt(librarianGetId.getText()), libGetAuthor.getText());
+					}
+					if(libGetGenre.getText()!="")
+					{
+						Library.userTable[logged_user].changeBookSubject(Integer.parseInt(librarianGetId.getText()), libGetGenre.getText());
+					}
+					popupBox("Book Edited!", "Information");
 				}
-				if(libGetAuthor.getText()!="")
+				catch(NumberFormatException ex)
 				{
-					Library.userTable[logged_user].changeBookAuthor(Integer.parseInt(librarianGetId.getText()), libGetAuthor.getText());
+					popupBox("The ID number you entered was invalid.", "ERROR");
+					librarianGetId.setText(""); //clear it
 				}
-				if(libGetGenre.getText()!="")
-				{
-					Library.userTable[logged_user].changeBookSubject(Integer.parseInt(librarianGetId.getText()), libGetGenre.getText());
-				}
-				popupBox("Book Edited!", "Information");
 			}
 			if(e.getSource() == libAddNewUserButton)
 			{
