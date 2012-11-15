@@ -29,7 +29,6 @@ public class LibraryClient extends JPanel implements ActionListener, ItemListene
 	
 	private int currentPanel; //this is a numbering system for the panel so we know what one to use
 	private JPanel panelObj; //this is the current panel we are using
-	private int usercount;
 	private String username, password;
 	private int logged_user;
 	
@@ -594,6 +593,8 @@ public class LibraryClient extends JPanel implements ActionListener, ItemListene
 						
 						//now create the first library user
 						Library.userTable[Library.userCount] = new Librarian(username, password);
+						logged_user = Library.userCount;
+						
 						Library.userCount++;
 						
 						//switch to the librarian panel
@@ -1039,7 +1040,6 @@ public class LibraryClient extends JPanel implements ActionListener, ItemListene
 		createData(); //create the library for us to use
 
 		//set all the default values
-		usercount = 0;
 		logged_user = 0;
 
 		currentPanel = LOGIN;
