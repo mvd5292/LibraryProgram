@@ -48,7 +48,7 @@ public abstract class User
 	*/
 	public boolean logIn(String username, String password)
 	{
-		if ((username == this.username) && (password == this.password))
+		if ((username.equals(this.username)) && (password.equals(this.password)))
 		{
 			isLoggedIn = true;
 			return true;

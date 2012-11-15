@@ -68,7 +68,8 @@ public class LibraryClient extends JPanel implements ActionListener, ItemListene
 	private JButton dueDate;
 	private JTextField showFines;
 	private JLabel idLabel;
-	
+	private JButton logoutButton;
+
 	private double totalFines;
 	
 		
@@ -187,7 +188,7 @@ public class LibraryClient extends JPanel implements ActionListener, ItemListene
 	{
 		//create all the buttons and stuff here and return the panel
 		JPanel temp = new JPanel();
-		
+
 		if (currentPanel == LIBRARIAN)
 		{
 			app.setSize(800,700);
@@ -196,19 +197,20 @@ public class LibraryClient extends JPanel implements ActionListener, ItemListene
 		{
 			app.setSize(700,500);
 		}
-		
-				
+
+
 		GridBagLayout layout = new GridBagLayout();
 		GridBagConstraints constraints = new GridBagConstraints();
-		
-		
+
+
 		constraints.fill = GridBagConstraints.BOTH;
 		constraints.weightx = 1.0;
 		constraints.weighty = 1.0;
-		
+
+
 	
-		temp.setLayout(layout);
-		
+temp.setLayout(layout);
+
 		spaceLabel = new JLabel("   ");
 		searchLabel = new JLabel("Search by: ");
 		myBooksLabel = new JLabel("My Books");
@@ -216,143 +218,171 @@ public class LibraryClient extends JPanel implements ActionListener, ItemListene
 		searchDropDown = new JComboBox(SEARCHCATAGORIES);
 		actionsDropDown = new JComboBox(ACTIONCATAGORIES);
 		actionsDropDown.addActionListener(this);
-		
+
 		idNumberInput = new JTextField(15);
 		idNumberInput.addActionListener(this);
-		
+
 		searchTextField = new JTextField(15);
 		searchTextField.addActionListener(this);
-		
+
 		showFines = new JTextField(15);
 		showFines.setEditable(false);
-		
+
 		searchResults = new JTextArea("Search Results", 10,10);
 		myBooksTextArea = new JTextArea("My Books", 10,10);
-		
+
 		getFines = new JButton("Fines");
 		getFines.addActionListener(this);
-		
+
 		dueDate = new JButton("Due Date");
 		idLabel = new JLabel("Id Number: ");
+		
+		logoutButton = new JButton("Log out");
+		logoutButton.addActionListener(this);
 		
 		constraints.gridx = 0;
 		constraints.gridy = 0; 
 		constraints.gridwidth = 1;
 		constraints.gridheight = 1;
+
 	
-		layout.setConstraints(searchLabel, constraints);
+layout.setConstraints(searchLabel, constraints);
 		temp.add(searchLabel);
 
 		constraints.gridx = 1;
 		constraints.gridy = 0; 
 		constraints.gridwidth = 1;
 		constraints.gridheight = 1;
+
 	
-		layout.setConstraints(searchDropDown, constraints);
+layout.setConstraints(searchDropDown, constraints);
 		temp.add(searchDropDown);
-		
+
 		constraints.gridx = 2;
 		constraints.gridy = 0; 
 		constraints.gridwidth = 1;
 		constraints.gridheight = 1;
+
 	
-		layout.setConstraints(searchTextField, constraints);
+layout.setConstraints(searchTextField, constraints);
 		temp.add(searchTextField);
+
 		
-		
-		
+
+
 		constraints.gridx = 3;
-		constraints.gridy = 5; 
+		constraints.gridy = 6; 
 		constraints.gridwidth = 1;
 		constraints.gridheight = 1;
+
 	
-		layout.setConstraints(actionLabel, constraints);
+layout.setConstraints(actionLabel, constraints);
 		temp.add(actionLabel);
 		
-		
+
+		constraints.gridx = 4;
+		constraints.gridy = 6; 
+		constraints.gridwidth = 1;
+		constraints.gridheight = 1;
+
+	
+layout.setConstraints(actionsDropDown, constraints);
+		temp.add(actionsDropDown);
+
+
 		constraints.gridx = 0;
 		constraints.gridy = 1; 
 		constraints.gridwidth = 3;
 		constraints.gridheight = 3;
+
 	
-		layout.setConstraints(searchResults, constraints);
+layout.setConstraints(searchResults, constraints);
 		temp.add(searchResults);
-		
+
 
 		constraints.gridx = 0;
 		constraints.gridy = 5; 
 		constraints.gridwidth = 1;
 		constraints.gridheight = 1;
+
 	
-		layout.setConstraints(spaceLabel, constraints);
+layout.setConstraints(spaceLabel, constraints);
 		temp.add(spaceLabel);
-		
-		
-		
-		constraints.gridx = 0;
-		constraints.gridy = 6; 
-		constraints.gridwidth = 1;
-		constraints.gridheight = 1;
-	
-		layout.setConstraints(myBooksLabel, constraints);
-		temp.add(myBooksLabel);
-		
+
+
+
 		constraints.gridx = 0;
 		constraints.gridy = 7; 
+		constraints.gridwidth = 1;
+		constraints.gridheight = 1;
+
+	
+layout.setConstraints(myBooksLabel, constraints);
+		temp.add(myBooksLabel);
+
+		constraints.gridx = 0;
+		constraints.gridy = 8; 
 		constraints.gridwidth = 3;
 		constraints.gridheight = 1;
+
 	
-		layout.setConstraints(myBooksTextArea, constraints);
+layout.setConstraints(myBooksTextArea, constraints);
 		temp.add(myBooksTextArea);
-		
+
 		
 
 		constraints.gridx = 3;
 		constraints.gridy = 0; 
 		constraints.gridwidth = 1;
 		constraints.gridheight = 1;
-	
-		layout.setConstraints(getFines, constraints);
-		temp.add(getFines);
-		
 
-		constraints.gridx = 4;
-		constraints.gridy = 0; 
+	
+layout.setConstraints(logoutButton, constraints);
+		temp.add(logoutButton);
+
+		constraints.gridx = 3;
+		constraints.gridy = 5; 
 		constraints.gridwidth = 1;
 		constraints.gridheight = 1;
+
 	
-		layout.setConstraints(showFines, constraints);
-		temp.add(showFines);
-		
-		
+layout.setConstraints(getFines, constraints);
+		temp.add(getFines);
+
+
 		constraints.gridx = 4;
 		constraints.gridy = 5; 
 		constraints.gridwidth = 1;
 		constraints.gridheight = 1;
+
 	
-		layout.setConstraints(actionsDropDown, constraints);
-		temp.add(actionsDropDown);
-		
+layout.setConstraints(showFines, constraints);
+		temp.add(showFines);
+
+
+
 		constraints.gridx = 3;
-		constraints.gridy = 6; 
+		constraints.gridy = 7; 
 		constraints.gridwidth = 1;
 		constraints.gridheight = 1;
+
 	
-		layout.setConstraints(idLabel, constraints);
+layout.setConstraints(idLabel, constraints);
 		temp.add(idLabel);
-		
+
 		constraints.gridx = 4;
-		constraints.gridy = 6; 
+		constraints.gridy = 7; 
 		constraints.gridwidth = 1;
 		constraints.gridheight = 1;
+
 	
-		layout.setConstraints(idNumberInput, constraints);
+layout.setConstraints(idNumberInput, constraints);
 		temp.add(idNumberInput);
-		
+
 		//add on if librarian
 		if(currentPanel == LIBRARIAN)
 		{
-			
+
 
 			librarianIdLabel = new JLabel("ID Number:");
 			librarianGetId = new JTextField(10);
@@ -375,184 +405,206 @@ public class LibraryClient extends JPanel implements ActionListener, ItemListene
 			libGetNewPassword = new JTextField();
 			libIsLibrarian = new JCheckBox("Librarian");
 			libAddNewUserButton = new JButton("Add User");
-			
-			
+
+
 			constraints.gridx = 0;
 			constraints.gridy = 8; 
 			constraints.gridwidth = 1;
 			constraints.gridheight = 1;
+
 		
-			layout.setConstraints(libSpaceTitle, constraints);
+layout.setConstraints(libSpaceTitle, constraints);
 			temp.add(libSpaceTitle);
-			
+
 			constraints.gridx = 0;
 			constraints.gridy = 9; 
 			constraints.gridwidth = 1;
 			constraints.gridheight = 1;
+
 		
-			layout.setConstraints(librarianTitle, constraints);
+layout.setConstraints(librarianTitle, constraints);
 			temp.add(librarianTitle);
-			
-			
+
+
 			constraints.gridx = 0;
 			constraints.gridy = 10; 
 			constraints.gridwidth = 1;
 			constraints.gridheight = 1;
+
 		
-			layout.setConstraints(librarianIdLabel, constraints);
+layout.setConstraints(librarianIdLabel, constraints);
 			temp.add(librarianIdLabel);
 
 			constraints.gridx = 0;
 			constraints.gridy = 11; 
 			constraints.gridwidth = 1;
 			constraints.gridheight = 1;
+
 		
-			layout.setConstraints(librarianGetId, constraints);
+layout.setConstraints(librarianGetId, constraints);
 			temp.add(librarianGetId);
-			
+
 			constraints.gridx = 3;
 			constraints.gridy = 11; 
 			constraints.gridwidth = 1;
 			constraints.gridheight = 1;
+
 		
-			layout.setConstraints(libAuthorLabel, constraints);
+layout.setConstraints(libAuthorLabel, constraints);
 			temp.add(libAuthorLabel);
-			
+
 			constraints.gridx = 4;
 			constraints.gridy = 11; 
 			constraints.gridwidth = 1;
 			constraints.gridheight = 1;
+
 		
-			layout.setConstraints(libGetAuthor, constraints);
+layout.setConstraints(libGetAuthor, constraints);
 			temp.add(libGetAuthor);
-			
+
 			constraints.gridx = 3;
 			constraints.gridy = 12; 
 			constraints.gridwidth = 1;
 			constraints.gridheight = 1;
+
 		
-			layout.setConstraints(libGenreLabel, constraints);
+layout.setConstraints(libGenreLabel, constraints);
 			temp.add(libGenreLabel);
-			
+
 			constraints.gridx = 4;
 			constraints.gridy = 12; 
 			constraints.gridwidth = 1;
 			constraints.gridheight = 1;
+
 		
-			layout.setConstraints(libGetGenre, constraints);
+layout.setConstraints(libGetGenre, constraints);
 			temp.add(libGetGenre);
-			
+
 			constraints.gridx = 3;
 			constraints.gridy = 13; 
 			constraints.gridwidth = 1;
 			constraints.gridheight = 1;
+
 		
-			layout.setConstraints(libPageCountLabel, constraints);
+layout.setConstraints(libPageCountLabel, constraints);
 			temp.add(libPageCountLabel);
-			
+
 			constraints.gridx = 4;
 			constraints.gridy = 13; 
 			constraints.gridwidth = 1;
 			constraints.gridheight = 1;
+
 		
-			layout.setConstraints(libGetPageCount, constraints);
+layout.setConstraints(libGetPageCount, constraints);
 			temp.add(libGetPageCount);
 
-			
+
 			constraints.gridx = 3;
 			constraints.gridy = 14; 
 			constraints.gridwidth = 1;
 			constraints.gridheight = 1;
+
 		
-			layout.setConstraints(libTitleLabel, constraints);
+layout.setConstraints(libTitleLabel, constraints);
 			temp.add(libTitleLabel);
-			
+
 			constraints.gridx = 4;
 			constraints.gridy = 14; 
 			constraints.gridwidth = 1;
 			constraints.gridheight = 1;
+
 		
-			layout.setConstraints(libGetTitle, constraints);
+layout.setConstraints(libGetTitle, constraints);
 			temp.add(libGetTitle);
-		
-			
+
+
 			constraints.gridx = 0;
 			constraints.gridy = 12; 
 			constraints.gridwidth = 1;
 			constraints.gridheight = 1;
+
 		
-			layout.setConstraints(libAddBookButton, constraints);
+layout.setConstraints(libAddBookButton, constraints);
 			libAddBookButton.addActionListener(this);
 			temp.add(libAddBookButton);
-			
+
 			constraints.gridx = 0;
 			constraints.gridy = 13; 
 			constraints.gridwidth = 1;
 			constraints.gridheight = 1;
+
 		
-			layout.setConstraints(libEditBookButton, constraints);
+layout.setConstraints(libEditBookButton, constraints);
 			libEditBookButton.addActionListener(this);
 			temp.add(libEditBookButton);
-			
+
 			constraints.gridx = 0;
 			constraints.gridy = 15; 
 			constraints.gridwidth = 1;
 			constraints.gridheight = 1;
+
 		
-			layout.setConstraints(libAddUserLabel, constraints);
+layout.setConstraints(libAddUserLabel, constraints);
 			temp.add(libAddUserLabel);
-			
+
 			constraints.gridx = 0;
 			constraints.gridy = 16; 
 			constraints.gridwidth = 1;
 			constraints.gridheight = 1;
+
 		
-			layout.setConstraints(libNewUserName, constraints);
+layout.setConstraints(libNewUserName, constraints);
 			temp.add(libNewUserName);
-			
+
 			constraints.gridx = 1;
 			constraints.gridy = 16; 
 			constraints.gridwidth = 1;
 			constraints.gridheight = 1;
+
 		
-			layout.setConstraints(libGetNewUserName, constraints);
+layout.setConstraints(libGetNewUserName, constraints);
 			temp.add(libGetNewUserName);
-			
-			
+
+
 			constraints.gridx = 0;
 			constraints.gridy = 17; 
 			constraints.gridwidth = 1;
 			constraints.gridheight = 1;
+
 		
-			layout.setConstraints(libNewPasswordLabel, constraints);
+layout.setConstraints(libNewPasswordLabel, constraints);
 			temp.add(libNewPasswordLabel);
-			
+
 			constraints.gridx = 1;
 			constraints.gridy = 17; 
 			constraints.gridwidth = 1;
 			constraints.gridheight = 1;
+
 		
-			layout.setConstraints(libGetNewPassword, constraints);
+layout.setConstraints(libGetNewPassword, constraints);
 			temp.add(libGetNewPassword);
-			
+
 			constraints.gridx = 2;
 			constraints.gridy = 16; 
 			constraints.gridwidth = 1;
 			constraints.gridheight = 1;
+
 		
-			layout.setConstraints(libIsLibrarian, constraints);
+layout.setConstraints(libIsLibrarian, constraints);
 			temp.add(libIsLibrarian);
-			
+
 			constraints.gridx = 2;
 			constraints.gridy = 17; 
 			constraints.gridwidth = 1;
 			constraints.gridheight = 1;
+
 		
-			layout.setConstraints(libAddNewUserButton, constraints);
+layout.setConstraints(libAddNewUserButton, constraints);
+libAddNewUserButton.addActionListener(this);
 			temp.add(libAddNewUserButton);
-			
+
 		}
-							
+
 		return temp;
 	}
 	
@@ -562,6 +614,26 @@ public class LibraryClient extends JPanel implements ActionListener, ItemListene
 		//create all the buttons and stuff here and return the panel
 		JPanel temp = createCustomerPanel();
 		return temp; //dont do anything for now
+	}
+	
+	
+	public void updateMyBooks()
+	{
+		//zac clark
+		String formattedResults = "";
+
+		for(int i = 0; i < Library.userTable[logged_user].myBooks.length; i++)
+		{
+			//popupBox("Result " + i + " is " + results[i], "");
+			//check if this slot is filled
+			if (Library.userTable[logged_user].myBooks[i] > 0) //0 is an empty result
+			{
+				formattedResults += "ID: " + Library.userTable[logged_user].myBooks[i] + " | " + Library.collection[Library.userTable[logged_user].myBooks[i]].title + "\t| " + Library.collection[Library.userTable[logged_user].myBooks[i]].author + "\n"; 
+			}
+		}//end for
+
+		//and now set the text
+		myBooksTextArea.setText(formattedResults);
 	}
 	
 	//Reactions to buttons
@@ -617,17 +689,18 @@ public class LibraryClient extends JPanel implements ActionListener, ItemListene
 								
 								logged_user = i;
 								
-								//check if the user is a libraria
+								//check if the user is a librarian
 								if (Library.userTable[i].isLibrarian)
 								{
-									//not sure if I have to delete this panel first
-									currentPanel = LIBRARIAN;
-									panelObj = createLibrarianPanel();
+									//they're a librarian
+									switchPanel(LIBRARIAN);
+									updateMyBooks();
 								}
 								else
 								{
-									currentPanel = CUSTOMER;
-									panelObj = createCustomerPanel();
+									//they're just a customer
+									switchPanel(CUSTOMER);
+									updateMyBooks();
 								}
 								
 								break; //get out of the loop
@@ -637,7 +710,8 @@ public class LibraryClient extends JPanel implements ActionListener, ItemListene
 								//incorrect!
 								failed = true;
 							}
-						}
+						}//end for
+						
 						
 						if (failed)
 						{
@@ -655,6 +729,12 @@ public class LibraryClient extends JPanel implements ActionListener, ItemListene
 			///////////////////////////////////////////////////////////////////////////////
 
 			//TODO
+			if(e.getSource() == logoutButton)
+			{
+				switchPanel(LOGIN);
+			}
+			
+			
 			if(e.getSource() == getFines)
 			{
 				totalFines = Library.userTable[logged_user].getTotalFine();
@@ -677,6 +757,7 @@ public class LibraryClient extends JPanel implements ActionListener, ItemListene
 							if(Library.userTable[logged_user].checkOutBook(Integer.parseInt(idNumberInput.getText())))
 							{
 								popupBox("The book was succesfully checked out!", "Checkout");
+								updateMyBooks();
 							}
 							else
 							{
@@ -727,6 +808,7 @@ public class LibraryClient extends JPanel implements ActionListener, ItemListene
 							if(Library.userTable[logged_user].returnBook(Integer.parseInt(idNumberInput.getText())))
 							{
 								popupBox("The book was successfully returned", "Return");
+								updateMyBooks();
 							}
 							else
 							{
