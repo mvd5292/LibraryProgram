@@ -108,10 +108,11 @@ class Library
 		
 		for(int i=1; i<=collectionSize; i++)
 		{			
-			if(name==collection[i].title)
+			//System.out.println("Comparing {" + name + "} to {" + collection[i].title + "}");
+			if(name.equals(collection[i].title))
 			{
 				indexArray[ctr]=i;
-				ctr++;					
+				ctr++;		
 			}
 		}
 		return indexArray;
@@ -126,7 +127,7 @@ class Library
 		int ctr=0;
 		for(int i=1; i<=collectionSize; i++)
 		{
-			if(author==collection[i].author)
+			if(author.equals(collection[i].author))
 			{
 				indexArray[ctr]=i;
 				ctr++;	
@@ -143,7 +144,7 @@ class Library
 		int ctr=0;
 		for(int i=1; i<=collectionSize; i++)
 		{
-			if(subject==collection[i].subject)
+			if(subject.equals(collection[i].subject))
 			{
 				indexArray[ctr]=i;
 				ctr++;

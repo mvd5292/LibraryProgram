@@ -99,6 +99,7 @@ public class LibraryClient extends JPanel implements ActionListener, ItemListene
 	private JTextField libGetNewPassword;
 	private JCheckBox libIsLibrarian;
 	private JButton libAddNewUserButton;
+	private boolean creatingLibrarian;
 
 	//helper functions to create each panel
 	
@@ -582,7 +583,8 @@ public class LibraryClient extends JPanel implements ActionListener, ItemListene
 					password = (passwordField.getPassword()).toString();
 					
 					//now create the first library user
-					Library.userTable[0] = new Librarian(username, password);
+					Library.userTable[Library.userCount] = new Librarian(username, password);
+					Library.userCount++;
 					
 					//switch to the librarian panel
 					switchPanel(LIBRARIAN);
@@ -640,7 +642,7 @@ public class LibraryClient extends JPanel implements ActionListener, ItemListene
 			////////////   ACTION HANDLING FOR CUSTOMER INTERFACE   ///////////////////////
 			///////////////////////////////////////////////////////////////////////////////
 
-		
+			//TODO
 			if(e.getSource() == getFines)
 			{
 				totalFines = Library.userTable[logged_user].getTotalFine();
@@ -665,7 +667,7 @@ public class LibraryClient extends JPanel implements ActionListener, ItemListene
 							popupBox("Invalid ID Number", "Error");
 						}
 						
-						
+						break;
 					}
 					case 1:
 					{
@@ -678,7 +680,7 @@ public class LibraryClient extends JPanel implements ActionListener, ItemListene
 							popupBox("The due date is:" + Library.userTable[logged_user].getWhenDue(Integer.parseInt(idNumberInput.getText())), "Due Date" );
 						}
 						
-						
+						break;
 					}
 					case 2:
 					{
@@ -690,7 +692,7 @@ public class LibraryClient extends JPanel implements ActionListener, ItemListene
 						{
 							popupBox("Invalid ID Number", "Error");
 						}
-						
+						break;
 					}
 					case 3:
 					{
@@ -702,7 +704,7 @@ public class LibraryClient extends JPanel implements ActionListener, ItemListene
 						{
 							popupBox("Invalid ID Number", "Error");
 						}
-						
+						break;
 					}
 					case 4:
 					{
@@ -714,6 +716,7 @@ public class LibraryClient extends JPanel implements ActionListener, ItemListene
 						{
 							popupBox("Invalid ID Number", "Error");
 						}
+						break;
 					}
 					
 				
@@ -725,7 +728,6 @@ public class LibraryClient extends JPanel implements ActionListener, ItemListene
 			
 			///////////////////////////////////////////////////////
 			//// SEARCHING - (zach kehs)
-			//TODO
 			//test searching
 			if (e.getSource() == searchTextField)
 			{
@@ -742,15 +744,7 @@ public class LibraryClient extends JPanel implements ActionListener, ItemListene
 					}
 					case S_TITLE:
 					{
-						popupBox("Passing {" + searchTextField.getText() + "}", "");
 						results = Library.searchByName(searchTextField.getText());
-						
-						for(int i = 1; i <= Library.collectionSize; i++)
-						{
-							//crashes here
-							popupBox(i + "th index is " + results[i-1] + ", title {" + Library.collection[i].title + "}", "");
-						}
-						
 						break;
 					}
 					case S_AUTHOR:
@@ -760,9 +754,7 @@ public class LibraryClient extends JPanel implements ActionListener, ItemListene
 					}
 				}//end switch
 				
-				
 				//now we need to paste the results into the text area
-				//String[] formattedResults = new String[Library.collectionSize];
 				String formattedResults = "";
 				int count = 0;
 				
@@ -772,10 +764,9 @@ public class LibraryClient extends JPanel implements ActionListener, ItemListene
 					//check if this slot is filled
 					if (results[i] > 0) //0 is an empty result
 					{
-						formattedResults += "\nID: " + results[i] + "\t" + Library.collection[results[i]].title + "\t" + Library.collection[results[i]].author; 
+						formattedResults += "ID: " + results[i] + " | " + Library.collection[results[i]].title + "\t| " + Library.collection[results[i]].author + "\n"; 
 						count++;
 					}
-					
 				}//end for
 				
 				//and now set the text
@@ -791,6 +782,41 @@ public class LibraryClient extends JPanel implements ActionListener, ItemListene
 			////////////   ACTION HANDLING FOR LIBRARIAN INTERFACE   ///////////////////////
 			///////////////////////////////////////////////////////////////////////////////
 
+			if(e.getSource() == libAddBookButton)
+			{
+				Library.userTable[logged_user].addBook(libGetTitle.getText(), libGetAuthor.getText(), libGetGenre.getText(), Integer.parseInt(libGetPageCount.getText()));
+			}
+			else if(e.getSource () == libEditBookButton)
+			{
+				if(libGetTitle.getText()!="")
+				{
+					Library.userTable[logged_user].changeBookTitle(Integer.parseInt(librarianGetId.getText()), libGetTitle.getText());
+				}
+				if(libGetAuthor.getText()!="")
+				{
+					Library.userTable[logged_user].changeBookAuthor(Integer.parseInt(librarianGetId.getText()), libGetAuthor.getText());
+				}
+				if(libGetGenre.getText()!="")
+				{
+					Library.userTable[logged_user].changeBookSubject(Integer.parseInt(librarianGetId.getText()), libGetGenre.getText());
+				}
+			}
+			if(e.getSource() == libAddNewUserButton)
+			{
+				if(creatingLibrarian)
+				{
+					Library.userTable[Library.userCount] = new Librarian(libGetNewUserName.getText(), libGetNewPassword.getText());
+					Library.userCount++;
+					popupBox("New Librarian Created", "Success");
+				}
+				else
+				{
+					Library.userTable[Library.userCount] = new Customer(libGetNewUserName.getText(), libGetNewPassword.getText());
+					Library.userCount++;
+					popupBox("New Customer Created", "Success");
+				}
+				
+			}
 		
 	}
 	
@@ -799,35 +825,28 @@ public class LibraryClient extends JPanel implements ActionListener, ItemListene
 	public void itemStateChanged(ItemEvent e)
 	{
 		//Switch by panel; then react by button
-		switch(currentPanel)
+		
+		
+		///////////////////////////////////////////////////////////////////////////////
+		///////////////////////////////////////////////////////////////////////////////
+		////////////   ITEM HANDLING FOR CUSTOMER INTERFACE   ///////////////////////
+		///////////////////////////////////////////////////////////////////////////////
+
+	
+		///////////////////////////////////////////////////////////////////////////////
+		///////////////////////////////////////////////////////////////////////////////
+		////////////   ITEM HANDLING FOR LIBRARIAN INTERFACE   ///////////////////////
+		///////////////////////////////////////////////////////////////////////////////
+
+		if(e.getSource() == libIsLibrarian && e.getStateChange() == ItemEvent.SELECTED)
 		{
-			//login screen. One button to handle; the "login" button.
-			case LOGIN:
-			{
-				
-				break;
-			}
-			
-			///////////////////////////////////////////////////////////////////////////////
-			///////////////////////////////////////////////////////////////////////////////
-			////////////   ITEM HANDLING FOR CUSTOMER INTERFACE   ///////////////////////
-			///////////////////////////////////////////////////////////////////////////////
-			case CUSTOMER:
-			{
-				
-				break;
-			}
-			
-			///////////////////////////////////////////////////////////////////////////////
-			///////////////////////////////////////////////////////////////////////////////
-			////////////   ITEM HANDLING FOR LIBRARIAN INTERFACE   ///////////////////////
-			///////////////////////////////////////////////////////////////////////////////
-			case LIBRARIAN:
-			{
-				
-				break;
-			}
+			creatingLibrarian = true;
 		}
+		if(e.getSource() == libIsLibrarian && e.getStateChange() == ItemEvent.DESELECTED)
+		{
+			creatingLibrarian = false;
+		}
+		
 	}
 	
 	public static void main(String [] args)
