@@ -649,7 +649,10 @@ libAddNewUserButton.addActionListener(this);
 				String passwordentered = new String(passwordField.getPassword());
 				//handle the login button
 
-				if ((usernameField.getText().length() == 0) || (passwordentered.length() == 0))
+				username = usernameField.getText();
+				password = passwordentered;
+				
+				if ((username.length() == 0) || (password.length() == 0))
 				{
 					popupBox("Invalid Entry!", "Error");
 				}
@@ -659,9 +662,6 @@ libAddNewUserButton.addActionListener(this);
 					if (Library.userCount == 0)
 					{
 						//initial user
-						username = usernameField.getText();
-						//getPassword returns a char[], and we need a String...
-						password = passwordentered;
 						
 						//now create the first library user
 						Library.userTable[Library.userCount] = new Librarian(username, password);
